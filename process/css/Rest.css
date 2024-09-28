@@ -1,0 +1,172 @@
+.fon2-icon {
+    position: absolute;
+    height: calc(100% - 205px);
+    width: 100%;
+    top: 205px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.frame-child {
+    align-self: stretch;
+    position: relative;
+    background-color: rgba(217, 217, 217, 0.59);
+    height: 27px;
+    z-index: 0;
+}
+
+.frame-item {
+    align-self: stretch;
+    position: relative;
+    background-color: var(--color-darkgray);
+    border-top: 3px solid var(--color-steelblue-200);
+    box-sizing: border-box;
+    height: 3px;
+    z-index: 1;
+}
+
+.frame-inner {
+    width: calc(100% + 3px);
+    position: absolute;
+    margin: 0 !important;
+    height: 10%;
+    top: -5%;
+    right: -1.5px;
+    bottom: 95%;
+    left: -1.5px;
+    background-color: var(--color-darkgray);
+    border-top: 3px solid var(--color-steelblue-200);
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.div1 {
+    width: 100%;
+    position: absolute;
+    margin: 0 !important;
+    height: 90%;
+    top: 0%;
+    left: 0px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.rectangle-parent {
+    position: absolute;
+    width: 100%;
+    top: 175px;
+    right: 0px;
+    left: 0px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 3px;
+}
+
+.maintext-child {
+    position: absolute;
+    top: 28px;
+    left: -4px;
+    border-radius: 10px;
+    background-color: rgba(255, 170, 11, 0.76);
+    width: 37px;
+    height: 74px;
+    overflow: hidden;
+}
+
+.p {
+    margin: 0;
+    font-weight: 800;
+}
+
+.p3 {
+    margin: 0;
+}
+
+.div2 {
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    display: inline-block;
+    width: 193px;
+}
+
+.maintext {
+    position: absolute;
+    top: 49px;
+    left: 167px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.56);
+    width: 199px;
+    height: 93px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 17px;
+}
+
+.logo-icon {
+    position: absolute;
+    top: 22px;
+    left: 14px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.div {
+    width: 100%;
+    position: relative;
+    background-color: #8095b4;
+    height: 812px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-steelblue-100);
+    font-family: var(--font-inter);
+}
+
+.clicker-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px; /* Увеличенная ширина круга */
+    height: 150px; /* Увеличенная высота круга */
+    background-color: rgba(255, 170, 11, 0.76);
+    border-radius: 50%; /* Создаем круг */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%); /* Центрирование по горизонтали и вертикали */
+    transition: transform 0.3s ease; /* Плавный переход для анимации */
+}
+
+.clicked {
+    transform: translate(-50%, -50%) scale(1.2); /* Увеличиваем круг при клике */
+}
+
+
+#clicks {
+    position: absolute;
+    bottom: 120px; /* Увеличьте отступ, чтобы разместить над кругом */
+    left: 50%; 
+    transform: translateX(-50%); 
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 2; /* Убедитесь, что текст над кругом */
+}

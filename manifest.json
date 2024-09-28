@@ -1,0 +1,21 @@
+{
+  "name": "Студентський асистент НУК",
+  "short_name": "NUOS Assistant",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8095B4",
+  "description": "Студентський асистент НУК",
+  "icons": [
+    {
+      "src": "./img/IMG_0736.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "./img/IMG_0736.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
+}

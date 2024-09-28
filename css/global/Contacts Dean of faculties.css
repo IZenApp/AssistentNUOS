@@ -1,0 +1,26 @@
+
+body {
+    margin: 0;
+    line-height: normal;
+}
+
+
+:root {
+    
+    /* fonts */
+    --font-inter: Inter;
+    
+    /* font sizes */
+    --font-size-2xs: 11px;
+    --font-size-sm: 14px;
+    
+    /* Colors */
+    --color-steelblue-100: #005493;
+    --color-steelblue-200: rgba(0, 84, 147, 0.45);
+    --color-darkgray: #a2a1a1;
+    --color-white: #fff;
+    
+    /* Border radiuses */
+    --br-xl: 20px;
+    
+}
