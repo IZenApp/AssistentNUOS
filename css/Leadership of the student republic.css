@@ -54,7 +54,7 @@
 }
 .parent {
 	position: absolute;
-	top: 255px;
+	top: 725px;
 	left: 15px;
 	width: 150px;
 	height: 212px;
@@ -149,7 +149,15 @@
 }
 .info-illia {
 	position: absolute;
-	top: 339px;
+	top: 785px;
+	left: 173px;
+	width: 201px;
+	height: 63px;
+	text-align: left;
+}
+.info-katia-leader {
+	position: absolute;
+	top: 315px;
 	left: 173px;
 	width: 201px;
 	height: 63px;
@@ -281,7 +289,7 @@
 
 .katya-parent-leader {
 	position: absolute;
-	top: 711px; /* Позиционируем его под katya-parent */
+	top: 225px; /* Позиционируем его под katya-parent */
 	left: 2px;
 	width: 176px;
 	height: 232px; /* Размер как у katya-parent */
@@ -300,4 +308,8 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+}
+
+.div {
+	height: 1010px;
 }
