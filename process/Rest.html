@@ -29,10 +29,6 @@
             </div>
         </div>
         <img class="logo-icon" alt="" src="../img/Logo.png" id="logoImage">
-        
-        <!-- Кликер -->
-        <div id="clicks">Кількість кліків: 0</div>
-        <div id="clicker" class="clicker-circle"></div>
     </div>
 
     <script>
@@ -44,20 +40,7 @@
         }
     </script>
 
-    <script>
-        let count = 0;
-        const clicker = document.getElementById('clicker');
-        const clicksDisplay = document.getElementById('clicks');
 
-        clicker.addEventListener('click', () => {
-            count++;
-            clicksDisplay.textContent = `Кількість кліків: ${count}`;
-            clicker.classList.add('clicked');
-            setTimeout(() => {
-                clicker.classList.remove('clicked');
-            }, 300);
-        });
-    </script>
 
 </body>
 </html>
