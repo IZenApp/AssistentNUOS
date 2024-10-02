@@ -279,3 +279,25 @@
 	font-family: var(--font-inter);
 }
 
+.katya-parent-leader {
+	position: absolute;
+	top: 711px; /* Позиционируем его под katya-parent */
+	left: 2px;
+	width: 176px;
+	height: 232px; /* Размер как у katya-parent */
+}
+
+.CPM {
+	position: absolute;
+	top: 165px; /* Совпадает с контейнером у katya-parent */
+	left: 13px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 0px 0px var(--br-10xl) var(--br-8xl);
+	background-color: var(--color-steelblue-200);
+	width: 150px;
+	height: 31.8px; /* Совпадает с высотой контейнера у katya-parent */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
