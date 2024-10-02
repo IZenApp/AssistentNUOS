@@ -113,21 +113,21 @@
 	flex-shrink: 0;
 }
 .frame {
-	position: absolute;
-	width: 46.86%;
-	top: 86px;
-	right: 52.29%;
-	left: 0.86%;
-	border-radius: var(--br-xl);
-	background-color: var(--color-steelblue-100);
-	height: 74px;
-	overflow: hidden;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	text-align: center;
+    position: absolute;
+    width: 46.86%; /* Оставьте это значение, или измените на 100% для полного ширины */
+    top: 86px; /* Позиционирование по вертикали */
+    right: 50%; /* Центрируем по горизонтали */
+    transform: translateX(50%); /* Сдвигаем влево на половину ширины элемента */
+    border-radius: var(--br-xl);
+    background-color: var(--color-steelblue-100);
+    height: 74px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
 }
 .frame-div {
 	position: absolute;
