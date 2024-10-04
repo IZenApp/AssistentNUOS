@@ -83,8 +83,15 @@
 	s1.setAttribute('crossorigin','*');
 	s0.parentNode.insertBefore(s1,s0);
 	})();
-	</script>
-	<!--End of Tawk.to Script-->
+	Tawk_API.onLoad = function() {
+		var tawkIframe = document.querySelector('iframe[title="chat widget"]');
+		if (tawkIframe) {
+			tawkIframe.style.width = '50px';
+			tawkIframe.style.height = '50px';
+		}
+	};
+</script>
+<!--End of Tawk.to Script-->
 
   	<script>
     		var instagramImage = document.getElementById("instagramImage");
