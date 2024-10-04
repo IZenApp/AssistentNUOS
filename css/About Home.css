@@ -59,7 +59,7 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	text-align: left;
+	text-align: center;
 }
 .container {
 	position: absolute;
@@ -118,7 +118,7 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	text-align: left;
+	text-align: center;
 }
 .wrapper1 {
 	position: absolute;
