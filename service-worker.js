@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assistant-cache-v2'; // Новая версия кеша
+const CACHE_NAME = 'assistant-cache-v1.3'; // Новая версия кеша
 
 self.addEventListener('install', (event) => {
     const htmlFiles = [
@@ -6,7 +6,6 @@ self.addEventListener('install', (event) => {
         './html/About Home.html',
         './html/About the University.html',
         './html/Call schedule.html',
-        './html/Contacts Dean of faculties.html',
         './html/Leadership of the student republic.html',
         './html/Manual.html',
         './html/Structure of the University.html',
