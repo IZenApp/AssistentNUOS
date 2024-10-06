@@ -35,8 +35,7 @@ self.addEventListener('install', (event) => {
         './css/Student republic.css',
         './css/Student.css',
         './css/Contacts Dean of faculties.css',
-        './css/Manual.css',
-        './process/css/Leadership of the student republic.css'
+        './css/Manual.css'
     ];
 
     const imageFiles = [
