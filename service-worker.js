@@ -1,6 +1,9 @@
-const CACHE_NAME = 'assistant-cache-v2.6'; // Новая версия кеша
+// Имя кеша. Увеличивай номер версии при каждом обновлении файлов.
+const CACHE_NAME = 'assistant-cache-v2.8'; 
 
+// Обработчик события установки service worker
 self.addEventListener('install', (event) => {
+    // Массивы файлов для кэширования
     const htmlFiles = [
         './index.html',
         './html/About Home.html',
@@ -66,8 +69,10 @@ self.addEventListener('install', (event) => {
         './img/Logo1.png'
     ];
 
+    // Объединяем все файлы в один массив
     const allFiles = [...htmlFiles, ...cssFiles, ...imageFiles, './index.html'];
 
+    // Кэшируем файлы
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(allFiles);
@@ -75,12 +80,14 @@ self.addEventListener('install', (event) => {
     );
 });
 
+// Обработчик события активации service worker
 self.addEventListener('activate', (event) => {
-    const cacheWhitelist = [CACHE_NAME];
+    const cacheWhitelist = [CACHE_NAME]; // Список актуальных кешей
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
+                    // Удаляем старые кеши
                     if (!cacheWhitelist.includes(cacheName)) {
                         return caches.delete(cacheName);
                     }
@@ -90,6 +97,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
+// Обработчик события fetch
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
