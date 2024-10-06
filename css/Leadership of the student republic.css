@@ -54,7 +54,7 @@
 }
 .parent {
 	position: absolute;
-	top: 735px;
+	top: 490px;
 	left: 15px;
 	width: 150px;
 	height: 212px;
@@ -149,7 +149,7 @@
 }
 .info-illia {
 	position: absolute;
-	top: 785px;
+	top: 550px;
 	left: 173px;
 	width: 201px;
 	height: 63px;
@@ -308,8 +308,4 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-}
-
-.div {
-	height: 1010px;
 }
