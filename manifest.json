@@ -8,12 +8,12 @@
   "description": "Студентський асистент НУК",
   "icons": [
     {
-      "src": "./img/IMG_0736.png",
+      "src": "./img/LogoPWA.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/IMG_0736.png",
+      "src": "./img/LogoPWA.png",
       "sizes": "512x512",
       "type": "image/png"
     }

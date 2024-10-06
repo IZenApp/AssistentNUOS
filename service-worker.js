@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assistant-cache-v1.3'; // Новая версия кеша
+const CACHE_NAME = 'assistant-cache-v1.4'; // Новая версия кеша
 
 self.addEventListener('install', (event) => {
     const htmlFiles = [
@@ -38,31 +38,29 @@ self.addEventListener('install', (event) => {
     ];
 
     const imageFiles = [
-        './img/1.png',
-        './img/2.png',
-        './img/3.png',
-        './img/5.png',
-        './img/4.png',
-        './img/6.png',
-        './img/7.png',
-        './img/8.png',
-        './img/9.png',
+        './img/Avatar/Dubinsky Oleg Yuriyovich.png',
+        './img/Avatar/Mikhailov Mikhailo Serhiyovich.png',
+        './img/Avatar/Olena.png',
+        './img/Avatar/Pavlov Gennady Viktorovich.png',
+        './img/Avatar/Slobodyan Sergiy Olegovich.png',
+        './img/Avatar/Trushlyakov Evgen Ivanovich.png',
+        './img/Avatar/Vova.png',
+        './img/Avatar/Yevhenii.png',
+        './img/Avatar/Illia.png',
+        './img/Avatar/Katya.png',
+        './img/Social/ElectroNEWS.png',
+        './img/Social/Instagram.png',
+        './img/Social/TikTok.png',
+        './img/Social/voiceNUOS.png',
         './img/Fon1.png',
         './img/Fon2.png',
-        './img/Fon3.png',
-        './img/Fon4.png',
-        './img/Fon5.png',
-        './img/Fon6.png',
-        './img/Fon7.png',
-        './img/Fon8.png',
-        './img/Fon9.png',
-        './img/Fon10.png',
+        './img/LogoPWA.png',
+        './img/Email.png',
+        './img/Phone.png',
+        './img/logo_small.svg',
         './img/LogoMain.png',
-        './img/Logo1.png',
-        './img/Logo2.png',
         './img/Logo.png',
-        './img/Avatar/Illia.png',
-        './img/Avatar/Katya.png'
+        './img/Logo1.png'
     ];
 
     const allFiles = [...htmlFiles, ...cssFiles, ...imageFiles, './index.html'];
