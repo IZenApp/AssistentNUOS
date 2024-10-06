@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assistant-cache-v2.4'; // Новая версия кеша
+const CACHE_NAME = 'assistant-cache-v2.6'; // Новая версия кеша
 
 self.addEventListener('install', (event) => {
     const htmlFiles = [
@@ -94,17 +94,8 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
             return response || fetch(event.request).catch(() => {
-                // Здесь можно вернуть резервный файл, если ничего не найдено
                 console.error(`Fetch failed for ${event.request.url}`);
             });
-        })
-    );
-});
-
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
         })
     );
 });
