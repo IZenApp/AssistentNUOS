@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assistant-cache-v1.8'; // Новая версия кеша
+const CACHE_NAME = 'assistant-cache-v1.9'; // Новая версия кеша
 
 self.addEventListener('install', (event) => {
     const htmlFiles = [
