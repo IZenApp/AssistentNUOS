@@ -19,14 +19,6 @@
 	object-fit: cover;
 	cursor: pointer;
 }
-.electronews-icon {
-	width: 62px;
-	position: relative;
-	border-radius: var(--br-11xl);
-	height: 60px;
-	object-fit: cover;
-	cursor: pointer;
-}
 .social {
 	position: absolute;
 	height: 7.39%;
