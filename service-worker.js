@@ -13,8 +13,7 @@ self.addEventListener('install', (event) => {
         './html/Manual.html',
         './html/Structure of the University.html',
         './html/Student republic.html',
-        './html/Student.html',
-        './test/main.html'
+        './html/Student.html'
     ];
 
     const cssFiles = [
