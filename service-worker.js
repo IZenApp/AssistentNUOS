@@ -27,8 +27,6 @@ self.addEventListener('install', (event) => {
         './css/global/global8.css',
         './css/global/global9.css',
         './css/global/global10.css',
-        './test/css/global/main.css',
-        './test/css/main.css',
         './css/index1.css',
         './css/gl.css',
         './css/About Home.css',
