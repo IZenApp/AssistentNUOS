@@ -1,5 +1,5 @@
 // Имя кеша. Увеличивай номер версии при каждом обновлении файлов.
-const CACHE_NAME = 'assistant-cache-v4.5'; 
+const CACHE_NAME = 'assistant-cache-v4.6'; 
 
 // Обработчик события установки service worker
 self.addEventListener('install', (event) => {
