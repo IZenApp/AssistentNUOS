@@ -56,6 +56,13 @@
   height: 60px;
   object-fit: cover;
 }
+.vova-icon {
+  width: 60px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  height: 60px;
+  object-fit: cover;
+}
 .users {
   position: absolute;
   height: 7.39%;

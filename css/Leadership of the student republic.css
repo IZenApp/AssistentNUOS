@@ -20,7 +20,7 @@
 	width: 135px;
 	text-shadow: 1px 0 0 #000, 0 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
 }
-.illia-icon {
+.vova-icon {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -38,7 +38,7 @@
 	flex-shrink: 0;
 	text-shadow: 1px 0 0 #000, 0 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
 }
-.wrapper {
+.vova-parent {
 	position: absolute;
 	top: 156px;
 	left: 0px;
@@ -135,7 +135,7 @@
 	height: 29px;
 	object-fit: cover;
 }
-.savunila7gmailcom {
+.email {
 	position: absolute;
 	top: 32px;
 	left: 38px;
@@ -158,14 +158,6 @@
 .info-katia-leader {
 	position: absolute;
 	top: 295px;
-	left: 173px;
-	width: 201px;
-	height: 63px;
-	text-align: left;
-}
-.info-katia {
-	position: absolute;
-	top: 547px;
 	left: 173px;
 	width: 201px;
 	height: 63px;
