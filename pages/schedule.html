@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Розклад дзвінків НУК імені адмірала Макарова - AssistentNUOS">
+    <meta name="keywords" content="розклад, дзвінки, НУК, НУОС, пари, заняття, час">
+    <meta name="author" content="AssistentNUOS Team">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AssistentNUOS">
+    <meta name="msapplication-TileColor" content="#667eea">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Розклад - AssistentNUOS">
+    <meta property="og:description" content="Актуальний розклад дзвінків НУК">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../assets/images/logo.png">
+    
+    <title>Розклад | AssistentNUOS</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/components.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/schedule.css?v=1.0">
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Floating particles background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="nav-logo">
+                    <img src="../assets/images/logo.svg" alt="AssistentNUOS Logo">
+                </div>
+                <div class="nav-text">
+                    <h2>AssistentNUOS</h2>
+                    <p>Ваш помічник в навчанні</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Головна</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Про нас</span>
+                </a>
+                <a href="university.html" class="nav-link">
+                    <i class="fas fa-university"></i>
+                    <span>Університет</span>
+                </a>
+                <a href="schedule.html" class="nav-link active">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Розклад</span>
+                </a>
+                <a href="leadership.html" class="nav-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Керівництво</span>
+                </a>
+                <a href="student-republic.html" class="nav-link">
+                    <i class="fas fa-flag"></i>
+                    <span>Студреспубліка</span>
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="hero-badge">
+                <i class="fas fa-clock"></i>
+                <span>Актуальний розклад дзвінків</span>
+            </div>
+            <h1 class="page-title">Розклад дзвінків</h1>
+            <p class="page-subtitle">
+                Актуальний розклад занять у НУК імені адмірала Макарова
+            </p>
+        </div>
+    </section>
+
+    <!-- Current Time Section -->
+    <section class="section">
+        <div class="container">
+            <div class="schedule-card">
+                <div class="schedule-card-header">
+                    <div class="schedule-card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Поточний час</h3>
+                </div>
+                <div class="schedule-card-content">
+                    <div class="schedule-time" id="current-time">Завантаження...</div>
+                    <div id="current-period">Визначення поточного періоду...</div>
+                    <div id="next-period"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="section bg-secondary">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Розклад дзвінків
+                </h2>
+                <p class="section-description">
+                    Актуальний час початку та закінчення пар
+                </p>
+            </div>
+
+            <!-- Schedule Table -->
+            <div class="schedule-container" id="regular-schedule">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Пара</th>
+                            <th>Час початку</th>
+                            <th>Час закінчення</th>
+                            <th>Тривалість</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="schedule-row" data-start="09:00" data-end="10:20">
+                            <td class="time-column">1 пара</td>
+                            <td class="time-column">09:00</td>
+                            <td class="time-column">10:20</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                        <tr class="schedule-break">
+                            <td colspan="4">
+                                <div class="break-info">
+                                    <span class="break-icon">☕</span>
+                                    Перерва 10 хвилин (10:20 - 10:30)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="schedule-row" data-start="10:30" data-end="11:50">
+                            <td class="schedule-lesson">2 пара</td>
+                            <td class="schedule-time">10:30</td>
+                            <td class="schedule-time">11:50</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                        <tr class="schedule-break">
+                            <td colspan="4">
+                                <div class="break-info">
+                                    <span class="break-icon">🍽️</span>
+                                    Велика перерва 40 хвилин (11:50 - 12:30)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="schedule-row" data-start="12:30" data-end="13:50">
+                            <td class="schedule-lesson">3 пара</td>
+                            <td class="schedule-time">12:30</td>
+                            <td class="schedule-time">13:50</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                        <tr class="schedule-break">
+                            <td colspan="4">
+                                <div class="break-info">
+                                    <span class="break-icon">☕</span>
+                                    Перерва 10 хвилин (13:50 - 14:00)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="schedule-row" data-start="14:00" data-end="15:20">
+                            <td class="schedule-lesson">4 пара</td>
+                            <td class="schedule-time">14:00</td>
+                            <td class="schedule-time">15:20</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                        <tr class="schedule-break">
+                            <td colspan="4">
+                                <div class="break-info">
+                                    <span class="break-icon">☕</span>
+                                    Перерва 10 хвилин (15:20 - 15:30)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="schedule-row" data-start="15:30" data-end="16:50">
+                            <td class="schedule-lesson">5 пара</td>
+                            <td class="schedule-time">15:30</td>
+                            <td class="schedule-time">16:50</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                        <tr class="schedule-break">
+                            <td colspan="4">
+                                <div class="break-info">
+                                    <span class="break-icon">☕</span>
+                                    Перерва 10 хвилин (16:50 - 17:00)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="schedule-row" data-start="17:00" data-end="18:20">
+                            <td class="schedule-lesson">6 пара</td>
+                            <td class="schedule-time">17:00</td>
+                            <td class="schedule-time">18:20</td>
+                            <td>1 год 20 хв</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips-section bg-secondary">
+        <div class="container">
+            <h2 class="text-center mb-5">
+                <i class="fas fa-lightbulb"></i>
+                Корисні поради
+            </h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Встановіть нагадування</h3>
+                    <p>Встановіть PWA додаток та дозвольте сповіщення, щоб не пропустити початок пар</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Плануйте маршрут</h3>
+                    <p>Заздалегідь дізнайтесь в якому корпусі та аудиторії будуть ваші заняття</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Приходьте заздалегідь</h3>
+                    <p>Рекомендуємо приходити за 10-15 хвилин до початку пари</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Офлайн режим</h3>
+                    <p>Розклад працює навіть без інтернету завдяки PWA технології</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div class="footer-section">
+                    <h3>AssistentNUOS</h3>
+                    <p>Ваш надійний помічник у навчанні</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Навігація</h3>
+                    <ul>
+                        <li><a href="../index.html">Головна</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                        <li><a href="university.html">Університет</a></li>
+                        <li><a href="schedule.html">Розклад</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Ресурси</h3>
+                    <ul>
+                        <li><a href="student-republic.html">Студреспубліка</a></li>
+                        <li><a href="leadership.html">Керівництво</a></li>
+                        <li><a href="offline.html">Офлайн</a></li>
+                    </ul>
+                </div>
+                
+            <div class="footer-bottom">
+                <p>&copy; 2025 AssistentNUOS. Всі права захищені.</p>
+                <div class="footer-tech">
+                    <span>Зроблено з</span>
+                    <i class="fas fa-heart"></i>
+                    <span>для студентів НУК</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/app.js"></script>
+    <script>
+        // Розклад дзвінків функціональність
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentTime();
+            updateScheduleStatus();
+            initScheduleTabs();
+            
+            // Оновлюємо кожну хвилину
+            setInterval(() => {
+                updateCurrentTime();
+                updateScheduleStatus();
+            }, 60000);
+        });
+
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('uk-UA', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        function updateScheduleStatus() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            const schedule = [
+                { start: '09:00', end: '10:20', name: '1 пара' },
+                { start: '10:30', end: '11:50', name: '2 пара' },
+                { start: '12:30', end: '13:50', name: '3 пара' },
+                { start: '14:00', end: '15:20', name: '4 пара' },
+                { start: '15:30', end: '16:50', name: '5 пара' },
+                { start: '17:00', end: '18:20', name: '6 пара' }
+            ];
+
+            let currentPeriod = '';
+            let nextPeriod = '';
+            
+            schedule.forEach((period, index) => {
+                const startTime = parseTime(period.start);
+                const endTime = parseTime(period.end);
+                
+                if (currentTime >= startTime && currentTime <= endTime) {
+                    currentPeriod = `Зараз: ${period.name}`;
+                    const remaining = endTime - currentTime;
+                    currentPeriod += ` (залишилось ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')})`;
+                } else if (currentTime < startTime) {
+                    if (!nextPeriod) {
+                        const timeToStart = startTime - currentTime;
+                        nextPeriod = `Наступна: ${period.name} через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
+                    }
+                }
+            });
+
+            if (!currentPeriod && !nextPeriod) {
+                if (currentTime < parseTime('09:00')) {
+                    currentPeriod = 'Заняття ще не почались';
+                    const timeToStart = parseTime('09:00') - currentTime;
+                    nextPeriod = `1 пара почнеться через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
+                } else {
+                    currentPeriod = 'Заняття на сьогодні завершені';
+                }
+            }
+
+            document.getElementById('current-period').textContent = currentPeriod;
+            document.getElementById('next-period').textContent = nextPeriod;
+        }
+
+        function parseTime(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 60000); // Update every minute
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="../assets/js/pwa.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../service-worker.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

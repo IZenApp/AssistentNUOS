@@ -1,106 +1,273 @@
-// Имя кеша. Увеличивай номер версии при каждом обновлении файлов.
-const CACHE_NAME = 'assistant-cache-v5.2'; 
+// ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-// Обработчик события установки service worker
-self.addEventListener('install', (event) => {
-    // Массивы файлов для кэширования
-    const htmlFiles = [
-        'index.html',
-        'html/About Home.html',
-        'html/About the University.html',
-        'html/Call schedule.html',
-        'html/Leadership of the student republic.html',
-        'html/Manual.html',
-        'html/Structure of the University.html',
-        'html/Student republic.html',
-        'html/Student.html'
-    ];
+const CACHE_NAME = 'nuos-assistant-v3.22.0';
+const OFFLINE_URL = '/pages/offline.html';
 
-    const cssFiles = [
-        'css/global/global1.css',
-        'css/global/global2.css',
-        'css/global/global3.css',
-        'css/global/global4.css',
-        'css/global/global5.css',
-        'css/global/global6.css',
-        'css/global/global7.css',
-        'css/global/global8.css',
-        'css/global/global9.css',
-        'css/global/global10.css',
-        'css/index1.css',
-        'css/gl.css',
-        'css/About Home.css',
-        'css/About the University.css',
-        'css/Call schedule.css',
-        'css/Leadership of the student republic.css',
-        'css/Structure of the University.css',
-        'css/Student republic.css',
-        'css/Student.css',
-        'css/Contacts Dean of faculties.css',
-        'css/Manual.css'
-    ];
+// Ресурси для кешування
+const STATIC_CACHE_URLS = [
+    '/',
+    '/index.html',
+    '/manifest.json',
+    '/assets/css/simple.css',
+    '/assets/js/pwa.js',
+    '/assets/images/logo.svg',
+    '/assets/images/logo.png',
+    '/assets/images/background-primary.png',
+    '/assets/images/background-secondary.png',
+    // Ікони
+    '/assets/images/icons/icon-72x72.png',
+    '/assets/images/icons/icon-96x96.png',
+    '/assets/images/icons/icon-128x128.png',
+    '/assets/images/icons/icon-144x144.png',
+    '/assets/images/icons/icon-152x152.png',
+    '/assets/images/icons/icon-192x192.png',
+    '/assets/images/icons/icon-384x384.png',
+    '/assets/images/icons/icon-512x512.png',
+    // Сторінки
+    '/pages/about.html',
+    '/pages/university.html',
+    '/pages/schedule.html',
+    '/pages/student-republic.html',
+    '/pages/leadership.html',
+    '/pages/manual.html',
+    '/pages/offline.html'
+];
 
-    const imageFiles = [
-        'img/Avatar/Dubinsky Oleg Yuriyovich.png',
-        'img/Avatar/Mikhailov Mikhailo Serhiyovich.png',
-        'img/Avatar/Olena.png',
-        'img/Avatar/Pavlov Gennady Viktorovich.png',
-        'img/Avatar/Slobodyan Sergiy Olegovich.png',
-        'img/Avatar/Trushlyakov Evgen Ivanovich.png',
-        'img/Avatar/Vova.png',
-        'img/Avatar/Yevhenii.png',
-        'img/Avatar/Illia.png',
-        'img/Avatar/Katya.png',
-        'img/Social/ElectroNEWS.png',
-        'img/Social/Instagram.png',
-        'img/Social/TikTok.png',
-        'img/Social/voiceNUOS.png',
-        'img/Fon1.png',
-        'img/Fon2.png',
-        'img/LogoPWA.png',
-        'img/Email.png',
-        'img/Phone.png',
-        'img/logo_small.svg',
-        'img/LogoMain.png',
-        'img/Logo.png',
-        'img/Logo1.png'
-    ];
+// ===== ПОДІЇ SERVICE WORKER =====
 
-    // Объединяем все файлы в один массив
-    const allFiles = [...htmlFiles, ...cssFiles, ...imageFiles, 'index.html'];
-
-    // Кэшируем файлы
+// Встановлення
+self.addEventListener('install', event => {
+    console.log('🔧 Service Worker: Встановлення');
+    
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(allFiles);
-        })
+        (async () => {
+            try {
+                const cache = await caches.open(CACHE_NAME);
+                console.log('📦 Кешування статичних ресурсів...');
+                await cache.addAll(STATIC_CACHE_URLS);
+                console.log('✅ Статичні ресурси закешовано');
+                
+                // Форсуємо активацію нового SW
+                self.skipWaiting();
+            } catch (error) {
+                console.error('❌ Помилка кешування:', error);
+            }
+        })()
     );
 });
 
-// Обработчик события активации service worker
-self.addEventListener('activate', (event) => {
-    const cacheWhitelist = [CACHE_NAME]; // Список актуальных кешей
+// Активація
+self.addEventListener('activate', event => {
+    console.log('🚀 Service Worker: Активація');
+    
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    // Удаляем старые кеши
-                    if (!cacheWhitelist.includes(cacheName)) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
+        (async () => {
+            try {
+                // Очищуємо старі кеші
+                const cacheNames = await caches.keys();
+                const deletePromises = cacheNames
+                    .filter(name => name !== CACHE_NAME)
+                    .map(name => {
+                        console.log('🗑️ Видаляємо старий кеш:', name);
+                        return caches.delete(name);
+                    });
+                
+                await Promise.all(deletePromises);
+                
+                // Берем контроль над всіма клієнтами
+                await self.clients.claim();
+                
+                console.log('✅ Service Worker активовано');
+            } catch (error) {
+                console.error('❌ Помилка активації:', error);
+            }
+        })()
     );
 });
 
-// Обработчик события fetch
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request).catch(() => {
-                console.error(`Fetch failed for ${event.request.url}`);
-            });
-        })
-    );
+// Перехоплення мережевих запитів
+self.addEventListener('fetch', event => {
+    // Ігноруємо не-GET запити
+    if (event.request.method !== 'GET') {
+        return;
+    }
+    
+    // Ігноруємо запити до інших доменів
+    if (!event.request.url.startsWith(self.location.origin)) {
+        return;
+    }
+    
+    event.respondWith(handleFetch(event.request));
 });
+
+// Обробка повідомлень
+self.addEventListener('message', event => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        console.log('⏩ Примусова активація Service Worker');
+        self.skipWaiting();
+    }
+});
+
+// ===== СТРАТЕГІЇ КЕШУВАННЯ =====
+
+async function handleFetch(request) {
+    const url = new URL(request.url);
+    
+    try {
+        // Стратегія для HTML сторінок
+        if (request.headers.get('accept')?.includes('text/html')) {
+            return await handlePageRequest(request);
+        }
+        
+        // Стратегія для статичних ресурсів (CSS, JS, зображення)
+        if (isStaticResource(url.pathname)) {
+            return await handleStaticResource(request);
+        }
+        
+        // Стратегія для зображень
+        if (isImageResource(url.pathname)) {
+            return await handleImageResource(request);
+        }
+        
+        // За замовчуванням - мережа з фолбеком на кеш
+        return await networkFirst(request);
+        
+    } catch (error) {
+        console.error('❌ Помилка обробки запиту:', error);
+        return await handleOfflineResponse(request);
+    }
+}
+
+// Cache First для статичних ресурсів
+async function handleStaticResource(request) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+        return cachedResponse;
+    }
+    
+    try {
+        const networkResponse = await fetch(request);
+        if (networkResponse.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, networkResponse.clone());
+        }
+        return networkResponse;
+    } catch (error) {
+        console.log('📱 Статичний ресурс недоступний офлайн:', request.url);
+        throw error;
+    }
+}
+
+// Network First для HTML сторінок
+async function handlePageRequest(request) {
+    try {
+        const networkResponse = await fetch(request);
+        if (networkResponse.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, networkResponse.clone());
+        }
+        return networkResponse;
+    } catch (error) {
+        console.log('📱 Сторінка недоступна, завантажуємо з кешу:', request.url);
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+            return cachedResponse;
+        }
+        
+        // Повертаємо головну сторінку як фолбек
+        return await caches.match('/index.html');
+    }
+}
+
+// Stale While Revalidate для зображень
+async function handleImageResource(request) {
+    const cachedResponse = await caches.match(request);
+    
+    const fetchPromise = fetch(request)
+        .then(response => {
+            if (response.ok) {
+                const cache = caches.open(CACHE_NAME);
+                cache.then(c => c.put(request, response.clone()));
+            }
+            return response;
+        })
+        .catch(() => null);
+    
+    return cachedResponse || await fetchPromise || await createOfflineImageResponse();
+}
+
+// Network First з фолбеком на кеш
+async function networkFirst(request) {
+    try {
+        const networkResponse = await fetch(request);
+        if (networkResponse.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, networkResponse.clone());
+        }
+        return networkResponse;
+    } catch (error) {
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+            return cachedResponse;
+        }
+        throw error;
+    }
+}
+
+// ===== ДОПОМІЖНІ ФУНКЦІЇ =====
+
+function isStaticResource(pathname) {
+    return pathname.includes('.css') || 
+           pathname.includes('.js') || 
+           pathname.includes('.woff') || 
+           pathname.includes('.woff2') ||
+           pathname.includes('.ttf');
+}
+
+function isImageResource(pathname) {
+    return pathname.includes('.png') || 
+           pathname.includes('.jpg') || 
+           pathname.includes('.jpeg') || 
+           pathname.includes('.svg') || 
+           pathname.includes('.webp') ||
+           pathname.includes('.gif');
+}
+
+async function handleOfflineResponse(request) {
+    // Для HTML сторінок повертаємо головну сторінку
+    if (request.headers.get('accept')?.includes('text/html')) {
+        return await caches.match('/index.html');
+    }
+    
+    // Для зображень повертаємо заглушку
+    if (isImageResource(request.url)) {
+        return await createOfflineImageResponse();
+    }
+    
+    // Для інших ресурсів повертаємо помилку
+    return new Response('Офлайн', {
+        status: 503,
+        statusText: 'Service Unavailable'
+    });
+}
+
+async function createOfflineImageResponse() {
+    // Створюємо простий SVG як заглушку
+    const svg = `
+        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#f0f0f0"/>
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#666">
+                📱 Офлайн
+            </text>
+        </svg>
+    `;
+    
+    return new Response(svg, {
+        headers: {
+            'Content-Type': 'image/svg+xml',
+            'Cache-Control': 'no-cache'
+        }
+    });
+}
+
+console.log('🎯 Service Worker завантажено для Асистента НУОС');

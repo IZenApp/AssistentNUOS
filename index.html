@@ -1,137 +1,315 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/global/gl.css" />
-  <link rel="stylesheet" href="css/global/index.css" />
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="manifest" href="manifest.json"> 
-  <title>Студентський асистент НУК</title>
-
-  <!--<style>
-    #overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #8095B4;
-      z-index: 999; 
-      display: none;
-    }
-
-    #notification {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #fff;
-      color: #000;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 400px;
-      z-index: 1000;
-      text-align: center;
-      font-size: 16px;
-    }
-
-    #notification ol {
-      text-align: left;
-      margin: 10px 0;
-    }
-  </style> 
-
-  <script>
-    let deferredPrompt;
-
-    const isIos = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      return /iphone|ipad|ipod/.test(userAgent);
-    };
-
-    const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
-    function showNotification() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('notification').style.display = 'block';
-    }
-
-    if (isIos() && !isInStandaloneMode()) {
-
-      window.addEventListener('load', showNotification);
-    } else {
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        showNotification();
-        document.getElementById('notification').addEventListener('click', () => {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('User accepted the A2HS prompt');
-            } else {
-              console.log('User dismissed the A2HS prompt');
-            }
-            deferredPrompt = null;
-            hideNotification();
-          });
-        });
-      });
-    }
-
-    function hideNotification() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('notification').style.display = 'none';
-    }
-  </script> -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AssistentNUOS - ваш надійний помічник у навчанні в НУК. Розклад, інформація про університет, довідники та багато іншого.">
+    <meta name="keywords" content="НУК, студентський помічник, університет кораблебудування, розклад, навчання">
+    <meta name="author" content="AssistentNUOS Team">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AssistentNUOS">
+    <meta name="msapplication-TileColor" content="#667eea">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AssistentNUOS - Студентський помічник НУК">
+    <meta property="og:description" content="Ваш надійний помічник у навчанні в НУК">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/logo.png">
+    
+    <title>AssistentNUOS | Головна</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/components.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/index.css?v=1.0">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-  <div class="the-main-screen">
-    <img class="fon1-icon" alt="" src="img/Fon1.png">
-    <div class="batton" id="battonContainer">
-      <div class="div">Продовжити</div>
+    <!-- Floating particles background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-    <div class="div1">
-      <p class="p">Вітаємо в НУК-додатку!</p>
-      <p class="p">&nbsp;</p>
-      <p class="p">Обирайте свій шлях: натисніть кнопку “Продовжити”, щоб почати відкривати нові можливості та завжди бути в центрі університетського життя.</p>
-    </div>
-    <div class="users">
-      <img class="katya-icon" alt="" src="img/Avatar/Katya.png">
-      <img class="katya-icon" alt="" src="img/Avatar/Yevhenii.png">
-      <img class="katya-icon" alt="" src="img/Avatar/Olena.png">
-      <img class="vova-icon" alt="" src="img/Avatar/Vova.png">
-    </div>
-    <div class="div2">Студентський асистент</div>
-    <img class="logo-main-icon" alt="" src="img/logo_small.svg">
-  </div>
 
-   <div id="overlay"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="nav-logo">
+                    <img src="assets/images/logo.svg" alt="AssistentNUOS Logo">
+                </div>
+                <div class="nav-text">
+                    <h2>AssistentNUOS</h2>
+                    <p>Ваш помічник в навчанні</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Головна</span>
+                </a>
+                <a href="pages/about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Про нас</span>
+                </a>
+                <a href="pages/university.html" class="nav-link">
+                    <i class="fas fa-university"></i>
+                    <span>Університет</span>
+                </a>
+                <a href="pages/schedule.html" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Розклад</span>
+                </a>
+                <a href="pages/leadership.html" class="nav-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Керівництво</span>
+                </a>
+                <a href="pages/student-republic.html" class="nav-link">
+                    <i class="fas fa-flag"></i>
+                    <span>Студреспубліка</span>
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-  <!-- <div id="notification" class="notification">
-    <p>Маленькі кроки для користування Студентським асистентом НУК:</p>
-    <ol>
-      <li>На iPhone торкніться значка «Поділитися» внизу екрана, а на Android – натисніть на три крапки у верхньому правому куті.</li>
-      <li>Прокрутіть вниз, доки не побачите опцію «Додати на головний екран».</li>
-      <li>Натисніть «Додати».</li>
-    </ol>
-    <p>Тепер доступ до Студентського асистента буде завжди під рукою!</p>
-  </div>  -->
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Для студентів НУК</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Добро пожалувати до
+                        <span class="title-accent">AssistentNUOS</span>
+                    </h1>
+                    <p class="hero-description">
+                        Ваш надійний цифровий помічник для навчання в Національному 
+                        університеті кораблебудування. Швидкий доступ до розкладу, 
+                        інформації про університет та всього необхідного для студентського життя.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="pages/schedule.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Переглянути розклад</span>
+                        </a>
+                        <a href="pages/about.html" class="btn btn-ghost">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Дізнатися більше</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script>
-    var battonContainer = document.getElementById("battonContainer");
-    if (battonContainer) {
-      battonContainer.addEventListener("click", function(e) {
-        window.location.href = "html/About Home.html";
-      });
-    }
-  </script>
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Можливості
+                    </h2>
+                    <p class="section-description">
+                        Все що потрібно для зручного навчання в НУК
+                    </p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Розклад занять</h3>
+                        <p>Актуальний розклад лекцій, практичних занять та іспитів для всіх груп та викладачів</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Про університет</h3>
+                        <p>Вся необхідна інформація про НУК, факультети, кафедри та структуру університету</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Керівництво</h3>
+                        <p>Контакти та інформація про адміністрацію університету, деканів та завідувачів кафедр</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3>Студреспубліка</h3>
+                        <p>Новини студентського самоврядування, заходи та можливості для активних студентів</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>PWA додаток</h3>
+                        <p>Встановіть на телефон та користуйтесь навіть без інтернету</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Quick Links Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        Швидкий доступ
+                    </h2>
+                    <p class="section-description">
+                        Найпопулярніші розділи для студентів
+                    </p>
+                </div>
+                
+                <div class="quick-links-grid">
+                    <a href="pages/schedule.html" class="quick-link-card">
+                        <div class="quick-link-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Розклад на сьогодні</h3>
+                        <p>Перегляньте розклад занять</p>
+                    </a>
+                    
+                    <a href="pages/university.html" class="quick-link-card">
+                        <div class="quick-link-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Факультети</h3>
+                        <p>Інформація про факультети НУК</p>
+                    </a>
+                    
+                    <a href="pages/leadership.html" class="quick-link-card">
+                        <div class="quick-link-icon">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <h3>Контакти</h3>
+                        <p>Знайти викладача або адміністратора</p>
+                    </a>
+                    
+                    <a href="pages/student-republic.html" class="quick-link-card">
+                        <div class="quick-link-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3>Новини</h3>
+                        <p>Останні події та оголошення</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AssistentNUOS</h3>
+                    <p>Ваш надійний помічник у навчанні</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Навігація</h3>
+                    <ul>
+                        <li><a href="index.html">Головна</a></li>
+                        <li><a href="pages/about.html">Про нас</a></li>
+                        <li><a href="pages/university.html">Університет</a></li>
+                        <li><a href="pages/schedule.html">Розклад</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Ресурси</h3>
+                    <ul>
+                        <li><a href="pages/student-republic.html">Студреспубліка</a></li>
+                        <li><a href="pages/leadership.html">Керівництво</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AssistentNUOS. Всі права захищені.</p>
+                <div class="footer-tech">
+                    <span>Зроблено з</span>
+                    <i class="fas fa-heart"></i>
+                    <span>для студентів НУК</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PWA Install Button -->
+    <button class="install-btn" id="installBtn" style="display: none;">
+        <i class="fas fa-download"></i>
+        <span>Встановити додаток</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="assets/js/pwa.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
