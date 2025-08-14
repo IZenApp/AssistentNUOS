@@ -38,48 +38,12 @@
   "icons": [
     {
       "src": "/assets/images/logo.svg",
-      "sizes": "72x72",
-      "type": "image/png",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/logo.svg",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/images/logo.svg",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/images/logo.svg",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/images/logo.svg",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/images/logo.svg",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/assets/images/logo.svg",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/images/logo.svg",
+      "src": "/assets/images/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -91,44 +55,28 @@
       "short_name": "Розклад",
       "description": "Переглянути розклад дзвінків",
       "url": "/pages/schedule.html",
-      "icons": [{ "src": "assets/images/icons/icon-96x96.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Студентська республіка",
       "short_name": "Студреспубліка",
       "description": "Інформація про студентську республіку",
       "url": "/pages/student-republic.html",
-      "icons": [{ "src": "assets/images/icons/icon-96x96.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Про університет",
       "short_name": "Про НУК",
       "description": "Інформація про університет",
-      "url": "/pages/about-university.html",
-      "icons": [{ "src": "assets/images/icons/icon-96x96.png", "sizes": "96x96" }]
+      "url": "/pages/university.html",
+      "icons": [{ "src": "/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Керівництво",
       "short_name": "Керівництво",
       "description": "Керівництво студентської республіки",
       "url": "/pages/leadership.html",
-      "icons": [{ "src": "assets/images/icons/icon-96x96.png", "sizes": "96x96" }]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "assets/images/screenshots/mobile-home.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Головна сторінка мобільної версії"
-    },
-    {
-      "src": "assets/images/screenshots/desktop-home.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Головна сторінка десктопної версії"
+      "icons": [{ "src": "/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ]
 }

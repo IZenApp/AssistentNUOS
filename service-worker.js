@@ -1,34 +1,44 @@
-// ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
+//const CACHE_VERSION = 'v7.0';===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_NAME = 'nuos-assistant-v4.7';
+const CACHE_VERSION = 'v6.6';
+const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/assets/css/simple.css',
+    '/assets/css/components.css',
+    '/assets/css/index.css',
+    '/assets/css/main.css',
+    '/assets/css/pages.css',
+    '/assets/css/responsive.css',
+    '/assets/css/offline.css',
+    '/assets/css/about-new.css',
+    '/assets/js/app.js',
     '/assets/js/pwa.js',
     '/assets/images/logo.svg',
     '/assets/images/logo.png',
     '/assets/images/background-primary.png',
     '/assets/images/background-secondary.png',
-    // Ікони
-    '/assets/images/icons/icon-72x72.png',
-    '/assets/images/icons/icon-96x96.png',
-    '/assets/images/icons/icon-128x128.png',
-    '/assets/images/icons/icon-144x144.png',
-    '/assets/images/icons/icon-152x152.png',
-    '/assets/images/icons/icon-192x192.png',
-    '/assets/images/icons/icon-384x384.png',
-    '/assets/images/icons/icon-512x512.png',
+    // Аватари команди
+    '/assets/images/avatars/Yevhenii.png',
+    '/assets/images/avatars/Vova.png',
+    '/assets/images/avatars/Katya.png',
+    '/assets/images/avatars/Olena.png',
+    '/assets/images/avatars/Olesya.jpeg',
+    '/assets/images/avatars/Trushlyakov Evgen Ivanovich.png',
+    '/assets/images/avatars/Slobodyan Sergiy Olegovich.png',
+    '/assets/images/avatars/Pavlov Gennady Viktorovich.png',
+    '/assets/images/avatars/Dubinsky Oleg Yuriyovich.png',
+    '/assets/images/avatars/Mikhailov Mikhailo Serhiyovich.png',
     // Сторінки
     '/pages/about.html',
     '/pages/university.html',
     '/pages/schedule.html',
     '/pages/student-republic.html',
     '/pages/leadership.html',
-    '/pages/manual.html',
     '/pages/offline.html'
 ];
 
@@ -173,8 +183,8 @@ async function handlePageRequest(request) {
             return cachedResponse;
         }
         
-        // Повертаємо головну сторінку як фолбек
-        return await caches.match('/index.html');
+        // Повертаємо офлайн сторінку як fallback
+        return await caches.match('/pages/offline.html') || await caches.match('/index.html');
     }
 }
 
@@ -233,9 +243,9 @@ function isImageResource(pathname) {
 }
 
 async function handleOfflineResponse(request) {
-    // Для HTML сторінок повертаємо головну сторінку
+    // Для HTML сторінок повертаємо офлайн сторінку
     if (request.headers.get('accept')?.includes('text/html')) {
-        return await caches.match('/index.html');
+        return await caches.match('/pages/offline.html') || await caches.match('/index.html');
     }
     
     // Для зображень повертаємо заглушку
@@ -244,7 +254,7 @@ async function handleOfflineResponse(request) {
     }
     
     // Для інших ресурсів повертаємо помилку
-    return new Response('Офлайн', {
+    return new Response('Офлайн - ресурс недоступний', {
         status: 503,
         statusText: 'Service Unavailable'
     });

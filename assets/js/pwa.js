@@ -5,8 +5,48 @@ console.log('🚀 PWA скрипт завантажено');
 // Перевірка підтримки PWA функцій
 if ('serviceWorker' in navigator) {
     console.log('✅ Service Worker підтримується');
+    
+    // Реєстрація Service Worker
+    registerServiceWorker();
 } else {
     console.log('❌ Service Worker не підтримується');
+}
+
+// ===== SERVICE WORKER РЕЄСТРАЦІЯ =====
+async function registerServiceWorker() {
+    try {
+        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        console.log('✅ Service Worker зареєстровано:', registration.scope);
+        
+        // Обробка оновлень
+        registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            console.log('🔄 Знайдено оновлення Service Worker');
+            
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    showUpdateNotification();
+                }
+            });
+        });
+        
+        return registration;
+    } catch (error) {
+        console.error('❌ Помилка реєстрації Service Worker:', error);
+        return null;
+    }
+}
+
+function showUpdateNotification() {
+    showNotification('🔄 Доступне оновлення додатка! Натисніть для оновлення.', 'info', 10000, () => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg && reg.waiting) {
+                    reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                }
+            });
+        }
+    });
 }
 
 // ===== INSTALL PROMPT =====

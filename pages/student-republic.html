@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Студентська республіка - AssistentNUOS</title>
-    <meta name="description" content="Студентське самоврядування НУК імені адмірала Макарова - сторінка в розробці">
+    <title>Студентське самоврядування - AssistentNUOS</title>
+    <meta name="description" content="Студентське самоврядування НУК імені адмірала Макарова - органи студентського представництва та їх функції">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +19,149 @@
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#667eea">
-    <link rel="apple-touch-icon" href="../assets/images/icons/icon-192x192.png">
+    
+    <style>
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float-badge 3s ease-in-out infinite;
+        }
+        
+        @keyframes float-badge {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #e0e7ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 4s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Organization Cards */
+        .organizations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .org-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .org-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .org-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .org-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .org-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .org-functions {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .org-functions li {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .org-functions li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+        }
+        
+        .org-functions li:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Floating Particles -->
@@ -73,7 +215,237 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-badge">Студентське самоврядування НУК</div>
+            <h1 class="hero-title">Студентська республіка</h1>
+            <p class="hero-subtitle">
+                Представляємо інтереси студентів, забезпечуємо їхні права та сприяємо розвитку студентського життя в університеті
+            </p>
+        </div>
+    </section>
+
+    <!-- Organizations Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">
+                Органи студентського самоврядування
+            </h2>
+            
+            <div class="organizations-grid">
+                <!-- 1. Центр молодіжної політики (найвища посада) -->
+                <div class="org-card">
+                    <div class="leader-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                        <img src="../assets/images/avatars/Olesya.jpeg" alt="Олеся" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 class="org-title">Центр молодіжної політики</h3>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <h4 style="color: white; margin: 0 0 0.3rem 0; font-size: 1.1rem;">Олексюк Олеся</h4>
+                        <p style="color: #74b9ff; margin: 0; font-size: 0.9rem;">Керівник Центру молодіжної політики</p>
+                    </div>
+                    <p class="org-description">
+                        Координує молодіжну політику університету, розвиває студентські ініціативи та проєкти
+                    </p>
+                    <ul class="org-functions">
+                        <li>Розробка молодіжної політики</li>
+                        <li>Підтримка студентських ініціатив</li>
+                        <li>Координація проєктів</li>
+                        <li>Розвиток лідерських якостей</li>
+                        <li>Міжнародне співробітництво</li>
+                    </ul>
+                </div>
+
+                <!-- 2. Студентська рада НУК -->
+                <div class="org-card">
+                    <div class="leader-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                        <img src="../assets/images/avatars/Vova.png" alt="Володимир" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 class="org-title">Студентська рада НУК</h3>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <h4 style="color: white; margin: 0 0 0.3rem 0; font-size: 1.1rem;">Смалієвський Володимир</h4>
+                        <p style="color: #74b9ff; margin: 0; font-size: 0.9rem;">Голова Студентської ради НУК</p>
+                    </div>
+                    <p class="org-description">
+                        Головний орган студентського самоврядування університету, який представляє інтереси всіх студентів НУК
+                    </p>
+                    <ul class="org-functions">
+                        <li>Захист прав та інтересів студентів</li>
+                        <li>Участь в управлінні університетом</li>
+                        <li>Організація студентських заходів</li>
+                        <li>Взаємодія з адміністрацією</li>
+                        <li>Розподіл соціальної стипендії</li>
+                    </ul>
+                </div>
+
+                <!-- 3. Профспілкова організація -->
+                <div class="org-card">
+                    <div class="leader-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                        <img src="../assets/images/avatars/Katya.png" alt="Катерина" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 class="org-title">Первинна профспілкова організація студентів</h3>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <h4 style="color: white; margin: 0 0 0.3rem 0; font-size: 1.1rem;">Моісеєнко Катерина</h4>
+                        <p style="color: #74b9ff; margin: 0; font-size: 0.9rem;">Голова ППОС НУК</p>
+                    </div>
+                    <p class="org-description">
+                        Організація, що захищає трудові та соціальні права студентів, надає правову підтримку
+                    </p>
+                    <ul class="org-functions">
+                        <li>Правовий захист студентів</li>
+                        <li>Соціальна підтримка</li>
+                        <li>Організація оздоровлення</li>
+                        <li>Культурно-масова робота</li>
+                        <li>Надання матеріальної допомоги</li>
+                    </ul>
+                </div>
+
+                <!-- 4. Студентські ради факультетів -->
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="org-title">Студентські ради факультетів</h3>
+                    <p class="org-description">
+                        Представницькі органи студентів на рівні факультетів, які вирішують питання академічного життя
+                    </p>
+                    <ul class="org-functions">
+                        <li>Представлення інтересів факультету</li>
+                        <li>Участь в освітньому процесі</li>
+                        <li>Організація факультетських заходів</li>
+                        <li>Взаємодія з деканатом</li>
+                        <li>Академічна підтримка студентів</li>
+                    </ul>
+                </div>
+
+                <!-- 5. Студентські ради гуртожитків -->
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="org-title">Студентські ради гуртожитків</h3>
+                    <p class="org-description">
+                        Органи самоврядування в студентських гуртожитках, що забезпечують комфортні умови проживання
+                    </p>
+                    <ul class="org-functions">
+                        <li>Забезпечення порядку в гуртожитку</li>
+                        <li>Організація побутових питань</li>
+                        <li>Культурно-розважальні заходи</li>
+                        <li>Взаємодія з адміністрацією</li>
+                        <li>Вирішення конфліктних ситуацій</li>
+                    </ul>
+                </div>
+
+                <!-- 6. Студентські організації -->
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="org-title">Студентські громадські організації</h3>
+                    <p class="org-description">
+                        Різноманітні студентські клуби, секції та організації за інтересами та спеціалізацією
+                    </p>
+                    <ul class="org-functions">
+                        <li>Наукові товариства та гуртки</li>
+                        <li>Спортивні секції та команди</li>
+                        <li>Творчі колективи</li>
+                        <li>Волонтерські організації</li>
+                        <li>Професійні студентські об'єднання</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.svg" alt="AssistentNUOS">
+                        <span>AssistentNUOS</span>
+                    </div>
+                    <p>Ваш надійний помічник у навчанні в НУК</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Корисні посилання</h4>
+                    <ul>
+                        <li><a href="../index.html">Головна</a></li>
+                        <li><a href="university.html">Університет</a></li>
+                        <li><a href="schedule.html">Розклад</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакти</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@assistentnuos.com</li>
+                        <li><i class="fas fa-phone"></i> +38 (0512) 76-48-79</li>
+                        <li><i class="fas fa-map-marker-alt"></i> м. Миколаїв, НУК</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AssistentNUOS. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/pwa.js"></script>
+    <script>
+        // Particles effect
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 5 + 2}px;
+                    height: ${Math.random() * 5 + 2}px;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.2});
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float ${Math.random() * 3 + 2}s infinite linear;
+                    z-index: -1;
+                `;
+                container.appendChild(particle);
+            }
+        }
+        
+        // CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            #particles-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+            
+            @keyframes float {
+                0% { transform: translateY(100vh) rotate(0deg); }
+                100% { transform: translateY(-100px) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize particles
+        createParticles();
+    </script>
+</body>
+</html>    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <div class="hero-badge">
@@ -207,9 +579,9 @@
                     <ul>
                         <li><a href="student-republic.html">Студреспубліка</a></li>
                         <li><a href="leadership.html">Керівництво</a></li>
-                        <li><a href="offline.html">Офлайн</a></li>
                     </ul>
                 </div>
+            </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2025 AssistentNUOS. Всі права захищені.</p>
