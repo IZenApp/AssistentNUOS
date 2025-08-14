@@ -2,7 +2,7 @@
   "name": "Асистент НУОС - Помічник студента",
   "short_name": "НУОС Помічник",
   "description": "Офіційний студентський асистент Національного університету кораблебудування імені адмірала Макарова",
-  "start_url": "/",
+  "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
