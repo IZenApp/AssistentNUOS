@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_NAME = 'nuos-assistant-v4.6';
+const CACHE_NAME = 'nuos-assistant-v4.7';
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
