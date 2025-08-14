@@ -40,7 +40,19 @@
       "src": "/AssistentNUOS/assets/images/logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/AssistentNUOS/assets/images/logo.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "/AssistentNUOS/assets/images/logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
       "src": "/AssistentNUOS/assets/images/icons/icon-72x72.png",
