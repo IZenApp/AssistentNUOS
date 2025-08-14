@@ -1,0 +1,112 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Яркий градиент фона -->
+    <radialGradient id="backgroundGradient" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#FF6B6B"/>
+      <stop offset="30%" style="stop-color:#4ECDC4"/>
+      <stop offset="60%" style="stop-color:#45B7D1"/>
+      <stop offset="100%" style="stop-color:#96CEB4"/>
+    </radialGradient>
+    
+    <!-- Градиент для основного текста -->
+    <linearGradient id="mainTextGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="50%" style="stop-color:#FFF8E1"/>
+      <stop offset="100%" style="stop-color:#FFECB3"/>
+    </linearGradient>
+    
+    <!-- Сильная тень для текста -->
+    <filter id="strongTextShadow" x="-100%" y="-100%" width="300%" height="300%">
+      <feDropShadow dx="4" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.8"/>
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#1565C0" flood-opacity="0.6"/>
+    </filter>
+    
+    <!-- Свечение -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Глянцевый эффект -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.4)"/>
+      <stop offset="40%" style="stop-color:rgba(255,255,255,0.2)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Основной яркий фон -->
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#backgroundGradient)"/>
+  
+  <!-- Дополнительные яркие элементы -->
+  <circle cx="100" cy="100" r="25" fill="#FFD93D" opacity="0.4"/>
+  <circle cx="420" cy="120" r="30" fill="#6BCF7F" opacity="0.3"/>
+  <circle cx="450" cy="380" r="20" fill="#FF6B6B" opacity="0.4"/>
+  <circle cx="70" cy="400" r="28" fill="#4ECDC4" opacity="0.3"/>
+  
+  <!-- Яркие звезды -->
+  <polygon points="150,60 158,80 178,80 162,92 170,112 150,100 130,112 138,92 122,80 142,80" fill="#FFD93D" opacity="0.8"/>
+  <polygon points="400,420 405,432 417,432 407,440 412,452 400,444 388,452 393,440 383,432 395,432" fill="#FF6B6B" opacity="0.7"/>
+  <polygon points="80,200 85,212 97,212 87,220 92,232 80,224 68,232 73,220 63,212 75,212" fill="#6BCF7F" opacity="0.6"/>
+  
+  <!-- ОГРОМНЫЙ текст "НУК" -->
+  <text x="256" y="200" 
+        font-family="Arial Black, Arial, sans-serif" 
+        font-size="140" 
+        font-weight="900" 
+        text-anchor="middle" 
+        fill="url(#mainTextGradient)" 
+        filter="url(#strongTextShadow)"
+        stroke="#1A237E" 
+        stroke-width="4">НУК</text>
+  
+  <!-- Большой подзаголовок -->
+  <text x="256" y="270" 
+        font-family="Arial, sans-serif" 
+        font-size="58" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="url(#mainTextGradient)" 
+        filter="url(#strongTextShadow)"
+        stroke="#1A237E" 
+        stroke-width="2">ASSISTANT</text>
+  
+  <!-- Увеличенный корабль -->
+  <g transform="translate(256, 340) scale(4)">
+    <!-- Корпус корабля -->
+    <path d="M-25 12 L0 -8 L25 12 L20 25 L-20 25 Z" fill="#FFFFFF" stroke="#1A237E" stroke-width="2"/>
+    
+    <!-- Мачта -->
+    <line x1="0" y1="-8" x2="0" y2="-30" stroke="#FFFFFF" stroke-width="3"/>
+    
+    <!-- Большой парус -->
+    <path d="M3 -25 L3 -8 L22 -12 L22 -28 Z" fill="#FFD93D" stroke="#1A237E" stroke-width="1"/>
+    
+    <!-- Яркий флаг -->
+    <path d="M3 -29 L3 -25 L15 -27 Z" fill="#FF6B6B"/>
+    
+    <!-- Волны -->
+    <path d="M-35 30 Q-25 27 -15 30 T5 30 T25 30 T45 30" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+    <path d="M-40 35 Q-30 32 -20 35 T0 35 T20 35 T40 35" stroke="#45B7D1" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Большой год -->
+  <text x="256" y="470" 
+        font-family="Arial, sans-serif" 
+        font-size="36" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="#FFFFFF" 
+        filter="url(#strongTextShadow)"
+        stroke="#1A237E" 
+        stroke-width="1">2025</text>
+  
+  <!-- Глянцевый эффект -->
+  <rect width="512" height="250" rx="100" ry="100" fill="url(#shine)" opacity="0.4"/>
+  
+  <!-- Яркая обводка -->
+  <rect width="512" height="512" rx="100" ry="100" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.6"/>
+</svg>
