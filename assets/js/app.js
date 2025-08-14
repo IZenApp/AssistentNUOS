@@ -55,26 +55,44 @@ function highlightCurrentPage() {
 }
 
 function createMobileMenu() {
-    const navbar = document.querySelector('.navbar');
-    const navList = document.querySelector('.navbar-nav');
+    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const navMenu = document.getElementById('navMenu');
     
-    if (!navbar || !navList) return;
-    
-    // Створюємо кнопку мобільного меню
-    const mobileToggle = document.createElement('button');
-    mobileToggle.className = 'mobile-menu-toggle btn btn-ghost';
-    mobileToggle.innerHTML = '☰';
-    mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+    if (!mobileToggle || !navMenu) return;
     
     // Додаємо обробник
     mobileToggle.addEventListener('click', () => {
-        navList.classList.toggle('show');
-        const isOpen = navList.classList.contains('show');
-        mobileToggle.innerHTML = isOpen ? '✕' : '☰';
-        mobileToggle.setAttribute('aria-label', isOpen ? 'Закрити меню' : 'Відкрити меню');
+        const isOpen = navMenu.classList.contains('show');
+        
+        if (isOpen) {
+            navMenu.classList.remove('show');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+        } else {
+            navMenu.classList.add('show');
+            mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+            mobileToggle.setAttribute('aria-label', 'Закрити меню');
+        }
     });
     
-    navbar.appendChild(mobileToggle);
+    // Закриваємо меню при кліку на посилання
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('show');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+        });
+    });
+    
+    // Закриваємо меню при кліку поза ним
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+            navMenu.classList.remove('show');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+        }
+    });
 }
 
 function initializeSmoothScroll() {
@@ -175,7 +193,7 @@ function createInstallPrompt() {
     const prompt = document.createElement('div');
     prompt.className = 'pwa-install-prompt';
     prompt.innerHTML = `
-        <img src="/assets/images/logo.png" alt="НУОС" class="pwa-install-icon">
+        <img src="/assets/images/logo.svg" alt="НУОС" class="pwa-install-icon">
         <div class="pwa-install-content">
             <div class="pwa-install-title">Встановити Асистент НУОС</div>
             <div class="pwa-install-description">Отримайте швидкий доступ до всіх функцій</div>
@@ -441,33 +459,97 @@ window.NuosApp = {
 // ===== CSS ДЛЯ ДИНАМІЧНИХ ЕЛЕМЕНТІВ =====
 const style = document.createElement('style');
 style.textContent = `
+    .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+    
     .mobile-menu-toggle {
         display: none;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .navbar-nav {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        margin: 0;
     }
     
     @media (max-width: 768px) {
         .mobile-menu-toggle {
             display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
         }
         
         .navbar-nav {
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            background: var(--bg-card);
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             flex-direction: column;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-100%);
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transform: translateX(100%);
             opacity: 0;
             visibility: hidden;
-            transition: all var(--transition-normal);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 2rem;
         }
         
         .navbar-nav.show {
-            transform: translateY(0);
+            transform: translateX(0);
             opacity: 1;
             visibility: visible;
+        }
+        
+        .navbar-nav li {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .navbar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar-nav .nav-link i {
+            font-size: 1.2rem;
         }
     }
     
@@ -508,6 +590,61 @@ style.textContent = `
     
     .notification-close:hover {
         opacity: 1;
+    }
+    
+    .pwa-install-prompt {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        max-width: 90vw;
+        width: 350px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1100;
+    }
+    
+    .pwa-install-prompt.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    
+    .pwa-install-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+    }
+    
+    .pwa-install-content {
+        flex: 1;
+    }
+    
+    .pwa-install-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #333;
+    }
+    
+    .pwa-install-description {
+        font-size: 0.9rem;
+        color: #666;
+    }
+    
+    .pwa-install-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 `;
 document.head.appendChild(style);

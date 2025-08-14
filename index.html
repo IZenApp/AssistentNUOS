@@ -45,39 +45,50 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand">
-                <div class="nav-logo">
-                    <img src="assets/images/logo.svg" alt="AssistentNUOS Logo">
+            <div class="navbar-content">
+                <div class="nav-brand">
+                    <div class="nav-logo">
+                        <img src="assets/images/logo.svg" alt="AssistentNUOS Logo">
+                    </div>
+                    <div class="nav-text">
+                        <h2>AssistentNUOS</h2>
+                        <p>Ваш помічник в навчанні</p>
+                    </div>
                 </div>
-                <div class="nav-text">
-                    <h2>AssistentNUOS</h2>
-                    <p>Ваш помічник в навчанні</p>
-                </div>
+                
+                <ul class="navbar-nav" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Головна</span>
+                    </a></li>
+                    <li><a href="pages/about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Про нас</span>
+                    </a></li>
+                    <li><a href="pages/university.html" class="nav-link">
+                        <i class="fas fa-university"></i>
+                        <span>Університет</span>
+                    </a></li>
+                    <li><a href="pages/schedule.html" class="nav-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Розклад</span>
+                    </a></li>
+                    <li><a href="pages/leadership.html" class="nav-link">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Керівництво</span>
+                    </a></li>
+                    <li><a href="pages/student-republic.html" class="nav-link">
+                        <i class="fas fa-flag"></i>
+                        <span>Студентське самоврядування</span>
+                    </a></li>
+                </ul>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Відкрити меню">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-            
-            <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">
-                    <i class="fas fa-home"></i>
-                    <span>Головна</span>
-                </a>
-                <a href="pages/about.html" class="nav-link">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Про нас</span>
-                </a>
-                <a href="pages/university.html" class="nav-link">
-                    <i class="fas fa-university"></i>
-                    <span>Університет</span>
-                </a>
-                <a href="pages/schedule.html" class="nav-link">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Розклад</span>
-                </a>
-                <a href="pages/leadership.html" class="nav-link">
-                    <i class="fas fa-users-cog"></i>
-                    <span>Керівництво</span>
-                </a>
-                <a href="pages/student-republic.html" class="nav-link">
-                    <i class="fas fa-flag"></i>
+        </div>
+    </nav>
                     <span>Студреспубліка</span>
                 </a>
             </div>
