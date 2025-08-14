@@ -295,8 +295,16 @@ function createOfflineIndicator() {
     const indicator = document.createElement('div');
     indicator.id = 'offline-indicator';
     indicator.innerHTML = `
-        <i class="fas fa-wifi-slash"></i>
-        Офлайн режим
+        <div class="offline-indicator-content">
+            <div class="offline-indicator-icon">
+                <i class="fas fa-wifi-slash"></i>
+            </div>
+            <div class="offline-indicator-text">
+                <span class="offline-indicator-title">Офлайн режим</span>
+                <span class="offline-indicator-subtitle">PWA активний</span>
+            </div>
+            <div class="offline-indicator-pulse"></div>
+        </div>
     `;
     
     indicator.style.cssText = `
@@ -304,15 +312,89 @@ function createOfflineIndicator() {
         top: 0;
         left: 0;
         right: 0;
-        background: #F44336;
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
-        text-align: center;
-        padding: 10px;
-        font-weight: 600;
         z-index: 10000;
         transform: translateY(-100%);
-        transition: transform 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        backdrop-filter: blur(10px);
     `;
+    
+    // Добавляем стили для содержимого
+    const style = document.createElement('style');
+    style.textContent = `
+        .offline-indicator-content {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 12px;
+            position: relative;
+        }
+        
+        .offline-indicator-icon {
+            font-size: 18px;
+            color: #fff;
+            animation: offline-pulse 2s infinite;
+        }
+        
+        @keyframes offline-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .offline-indicator-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .offline-indicator-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .offline-indicator-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .offline-indicator-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin-left: auto;
+            animation: status-pulse 1.5s infinite;
+        }
+        
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        @media (max-width: 768px) {
+            .offline-indicator-content {
+                padding: 10px 15px;
+                gap: 10px;
+            }
+            
+            .offline-indicator-title {
+                font-size: 13px;
+            }
+            
+            .offline-indicator-subtitle {
+                font-size: 11px;
+            }
+        }
+    `;
+    
+    if (!document.getElementById('offline-indicator-styles')) {
+        style.id = 'offline-indicator-styles';
+        document.head.appendChild(style);
+    }
     
     document.body.appendChild(indicator);
     return indicator;
@@ -326,7 +408,7 @@ window.addEventListener('online', () => {
     if (offlineIndicator) {
         offlineIndicator.style.transform = 'translateY(-100%)';
     }
-    showNotification('З\'єднання відновлено', 'success');
+    showNotification('🌐 З\'єднання відновлено!', 'success');
 });
 
 window.addEventListener('offline', () => {
@@ -335,7 +417,7 @@ window.addEventListener('offline', () => {
         offlineIndicator = createOfflineIndicator();
     }
     offlineIndicator.style.transform = 'translateY(0)';
-    showNotification('Працюємо в офлайн режимі', 'warning');
+    showNotification('📱 Перехід в офлайн режим', 'info');
 });
 
 // ===== ОНОВЛЕННЯ PWA =====

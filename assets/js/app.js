@@ -284,13 +284,13 @@ function initializeOfflineDetection() {
     window.addEventListener('online', () => {
         isOnline = true;
         updateOnlineStatus();
-        showNotification('З\'єднання відновлено!', 'success');
+        showNotification('🌐 З\'єднання відновлено!', 'success');
     });
     
     window.addEventListener('offline', () => {
         isOnline = false;
         updateOnlineStatus();
-        showNotification('Немає з\'єднання з інтернетом', 'warning');
+        showNotification('🌐 Втрачено з\'єднання з інтернетом', 'warning');
     });
 }
 
@@ -301,7 +301,20 @@ function updateOnlineStatus() {
         if (!offlineBanner) {
             const banner = document.createElement('div');
             banner.className = 'offline-banner';
-            banner.textContent = '📴 Немає з\'єднання з інтернетом. Деякі функції можуть бути недоступні.';
+            banner.innerHTML = `
+                <div class="offline-banner-content">
+                    <div class="offline-banner-icon">
+                        <i class="fas fa-wifi-slash"></i>
+                    </div>
+                    <div class="offline-banner-text">
+                        <strong>Немає підключення до інтернету</strong>
+                        <span>Не хвилюйтесь! Більшість функцій працюють офлайн завдяки PWA технології</span>
+                    </div>
+                    <button class="offline-banner-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
             document.body.prepend(banner);
             
             setTimeout(() => banner.classList.add('show'), 100);
@@ -654,6 +667,102 @@ style.textContent = `
     .btn-sm {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+    }
+    
+    /* Офлайн баннер стилі */
+    .offline-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+        color: white;
+        z-index: 10000;
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    .offline-banner.show {
+        transform: translateY(0);
+    }
+    
+    .offline-banner-content {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 15px;
+    }
+    
+    .offline-banner-icon {
+        font-size: 24px;
+        color: white;
+        animation: pulse-wifi 2s infinite;
+    }
+    
+    @keyframes pulse-wifi {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(1.1); }
+    }
+    
+    .offline-banner-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .offline-banner-text strong {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .offline-banner-text span {
+        font-size: 14px;
+        opacity: 0.9;
+        line-height: 1.4;
+    }
+    
+    .offline-banner-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 14px;
+    }
+    
+    .offline-banner-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+    
+    @media (max-width: 768px) {
+        .offline-banner-content {
+            padding: 12px 15px;
+            gap: 12px;
+        }
+        
+        .offline-banner-text strong {
+            font-size: 14px;
+        }
+        
+        .offline-banner-text span {
+            font-size: 13px;
+        }
+        
+        .offline-banner-icon {
+            font-size: 20px;
+        }
     }
 `;
 document.head.appendChild(style);

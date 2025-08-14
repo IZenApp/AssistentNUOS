@@ -77,6 +77,7 @@
             <h3>Симуляція офлайн режиму:</h3>
             <button class="test-button" onclick="simulateOffline()">Симулювати офлайн</button>
             <button class="test-button" onclick="simulateOnline()">Симулювати онлайн</button>
+            <button class="test-button" onclick="testOfflineNotifications()">Тест уведомлень офлайн</button>
         </div>
         
         <div class="results" id="testResults">
@@ -105,10 +106,10 @@
             const status = document.getElementById('connectionStatus');
             if (navigator.onLine) {
                 status.className = 'status online';
-                status.textContent = '🟢 Онлайн - З\'єднання активне';
+                status.innerHTML = '🟢 <strong>Онлайн</strong> - З\'єднання активне та стабільне';
             } else {
                 status.className = 'status offline';
-                status.textContent = '🔴 Офлайн - Немає з\'єднання';
+                status.innerHTML = '🔴 <strong>Офлайн</strong> - Працюємо в автономному режимі';
             }
         }
 
@@ -254,6 +255,22 @@
             log('💡 Service Worker буде намагатися завантажити з мережі та оновлювати кеш', 'info');
         }
 
+        // Тест уведомлень офлайн
+        function testOfflineNotifications() {
+            log('🧪 Тестування офлайн уведомлень...', 'info');
+            
+            // Створюємо подію offline
+            const offlineEvent = new Event('offline');
+            window.dispatchEvent(offlineEvent);
+            
+            setTimeout(() => {
+                // Створюємо подію online
+                const onlineEvent = new Event('online');
+                window.dispatchEvent(onlineEvent);
+                log('✅ Тест уведомлень завершено', 'success');
+            }, 3000);
+        }
+
         // Ініціалізація
         window.addEventListener('load', () => {
             updateConnectionStatus();
@@ -277,12 +294,12 @@
         // Відстеження змін з'єднання
         window.addEventListener('online', () => {
             updateConnectionStatus();
-            log('🟢 З\'єднання відновлено', 'success');
+            log('🟢 З\'єднання відновлено - повернулися в онлайн режим', 'success');
         });
 
         window.addEventListener('offline', () => {
             updateConnectionStatus();
-            log('🔴 З\'єднання втрачено', 'error');
+            log('🔴 З\'єднання втрачено - перехід в офлайн режим', 'error');
         });
     </script>
 </body>
