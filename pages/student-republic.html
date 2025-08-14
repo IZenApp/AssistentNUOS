@@ -357,43 +357,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <span>AssistentNUOS</span>
-                    </div>
-                    <p>Ваш надійний помічник у навчанні в НУК</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Корисні посилання</h4>
-                    <ul>
-                        <li><a href="../index.html">Головна</a></li>
-                        <li><a href="university.html">Університет</a></li>
-                        <li><a href="schedule.html">Розклад</a></li>
-                        <li><a href="about.html">Про нас</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Контакти</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> info@assistentnuos.com</li>
-                        <li><i class="fas fa-phone"></i> +38 (0512) 76-48-79</li>
-                        <li><i class="fas fa-map-marker-alt"></i> м. Миколаїв, НУК</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 AssistentNUOS. Всі права захищені.</p>
-            </div>
-        </div>
-    </footer>
-
     <!-- Scripts -->
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/pwa.js"></script>
@@ -442,6 +405,55 @@
         
         // Initialize particles
         createParticles();
+    </script>
+</body>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div class="footer-section">
+                    <h3>AssistentNUOS</h3>
+                    <p>Ваш надійний помічник у навчанні</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Навігація</h3>
+                    <ul>
+                        <li><a href="../index.html">Головна</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                        <li><a href="university.html">Університет</a></li>
+                        <li><a href="schedule.html">Розклад</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Ресурси</h3>
+                    <ul>
+                        <li><a href="student-republic.html">Студреспубліка</a></li>
+                        <li><a href="leadership.html">Керівництво</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/pwa.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../service-worker.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

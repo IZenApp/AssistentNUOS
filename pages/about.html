@@ -18,14 +18,14 @@
     <meta property="og:title" content="Про нас - AssistentNUOS">
     <meta property="og:description" content="Дізнайтесь більше про команду та історію створення студентського помічника НУК">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:image" content="../assets/images/logo.svg">
     
     <title>Про нас | AssistentNUOS</title>
-    <link rel="icon" type="image/x-icon" href="../assets/images/logo.png">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="../assets/css/components.css?v=1.0">
-    <link rel="stylesheet" href="../assets/css/about.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/components.css?v=1.1">
+    <link rel="stylesheet" href="../assets/css/about-new.css?v=1.1">
     <link rel="manifest" href="../manifest.json">
     
     <!-- Font Awesome -->
@@ -50,7 +50,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite alternate;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) !important;
+            background: rgba(255,255,255,0.15) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        @media (max-width: 768px) {
+            .team-card {
+                margin-bottom: 2rem;
+            }
         }
         
         @keyframes gradient-shift {
@@ -163,69 +174,57 @@
             <!-- Team Section -->
             <section style="padding: 60px 0;">
                 <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: white;">Наша команда</h2>
-                    
-                    <!-- 2. Голова Студентської Ради НУК -->
-                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px);">
-                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <!-- 1. Голова Студентської Ради НУК -->
+                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <img src="../assets/images/avatars/Vova.png" alt="Володимир" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <h3 style="color: white; margin-bottom: 0.5rem;">Смалієвський Володимир</h3>
-                        <p style="color: #74b9ff; margin-bottom: 1rem;">Голова Студентської Ради НУК</p>
-                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">Очолює студентське самоврядування університету, представляє інтереси студентів</p>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: 600;">Смалієвський Володимир</h3>
+                        <p style="color: #74b9ff; margin-bottom: 1rem; font-weight: 500; font-size: 1rem;">Голова Студентської Ради НУК</p>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;">Очолює студентське самоврядування університету, представляє інтереси студентів у адміністрації та координує роботу студентських організацій</p>
                     </div>
                     
-                    <!-- 3. Голова Первинної профспілкової організації -->
-                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px);">
-                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                    <!-- 2. Голова Первинної профспілкової організації -->
+                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <img src="../assets/images/avatars/Katya.png" alt="Катерина" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <h3 style="color: white; margin-bottom: 0.5rem;">Моісеєнко Катерина</h3>
-                        <p style="color: #74b9ff; margin-bottom: 1rem;">Голова Первинної профспілкової організації студентів НУК</p>
-                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">Захищає права та інтереси студентів, організовує профспілкову діяльність</p>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: 600;">Моісеєнко Катерина</h3>
+                        <p style="color: #74b9ff; margin-bottom: 1rem; font-weight: 500; font-size: 1rem;">Голова Первинної профспілкової організації студентів НУК</p>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;">Захищає права та інтереси студентів, організовує профспілкову діяльність та соціальні програми підтримки</p>
                     </div>
                     
-                    <!-- 4. Lead Developer проекту -->
-                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px);">
-                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                    <!-- 3. Lead Developer проекту -->
+                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <img src="../assets/images/avatars/Yevhenii.png" alt="Євгеній" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <h3 style="color: white; margin-bottom: 0.5rem;">Бачула Євгеній</h3>
-                        <p style="color: #74b9ff; margin-bottom: 1rem;">Lead Developer</p>
-                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">Головний розробник проекту, відповідає за архітектуру та PWA функціональність</p>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: 600;">Бачула Євгеній</h3>
+                        <p style="color: #74b9ff; margin-bottom: 1rem; font-weight: 500; font-size: 1rem;">Lead Developer & Project Manager</p>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;">Головний розробник проекту, відповідає за архітектуру, PWA функціональність та координацію розробки</p>
                     </div>
                     
-                    <!-- 5. Content Manager -->
-                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px);">
-                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3);">
+                    <!-- 4. Content Manager -->
+                    <div class="team-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                        <div class="member-avatar" style="width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <img src="../assets/images/avatars/Olena.png" alt="Олена" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <h3 style="color: white; margin-bottom: 0.5rem;">Гаврилюк Олена</h3>
-                        <p style="color: #74b9ff; margin-bottom: 1rem;">Content Manager</p>
-                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">Створює контент, пише статті та новини для сайту університету</p>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: 600;">Гаврилюк Олена</h3>
+                        <p style="color: #74b9ff; margin-bottom: 1rem; font-weight: 500; font-size: 1rem;">Журналіст і Content Manager</p>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;">Пише новини та статті для офіційного сайту університету, створює контент для студентських видань та висвітлює життя НУК</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- Contact Section -->
-            <section style="padding: 60px 0; background: rgba(255,255,255,0.05); border-radius: 20px; margin: 20px 0;">
-                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <h2 style="color: white; margin-bottom: 2rem;">Зв'яжіться з нами</h2>
-                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Маєте питання або пропозиції? Ми завжди відкриті до спілкування!</p>
-                    
-                    <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                            <i class="fas fa-envelope" style="color: #74b9ff; font-size: 1.5rem;"></i>
-                            <span style="color: white;">assistentnuos@gmail.com</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                            <i class="fab fa-telegram" style="color: #74b9ff; font-size: 1.5rem;"></i>
-                            <span style="color: white;">@AssistentNUOS</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                            <i class="fab fa-github" style="color: #74b9ff; font-size: 1.5rem;"></i>
-                            <span style="color: white;">github.com/IZenApp/AssistentNUOS</span>
-                        </div>
-                    </div>
+                <!-- Додаткова інформація про команду -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 3rem; text-align: center; margin-top: 3rem;">
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem;">Наша місія</h3>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                        Ми об'єднуємо студентське самоврядування та інноваційні технології для створення комфортного 
+                        та ефективного навчального середовища в НУК. Наша команда працює над тим, щоб кожен студент 
+                        мав доступ до актуальної інформації та необхідних інструментів для успішного навчання.
+                    </p>
                 </div>
             </section>
         </div>
@@ -237,7 +236,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>AssistentNUOS</h3>
-                    <p>Ваш надійний помічник у навчанні</p>
+                    <p>Студентський помічник для навчання в Національному університеті кораблебудування імені адмірала Макарова.</p>
+                    <p>Створено студентами для студентів ❤️</p>
                 </div>
                 
                 <div class="footer-section">

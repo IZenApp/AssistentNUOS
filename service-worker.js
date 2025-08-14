@@ -1,8 +1,9 @@
-//const CACHE_VERSION = 'v7.0';===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
+// ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v6.7';
+const CACHE_VERSION = 'v7.2';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
+const CACHE_NAME = STATIC_CACHE;
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
@@ -16,12 +17,13 @@ const STATIC_CACHE_URLS = [
     '/assets/css/responsive.css',
     '/assets/css/offline.css',
     '/assets/css/about-new.css',
+    '/assets/css/index-new.css',
+    '/assets/css/leadership.css',
+    '/assets/css/schedule.css',
+    '/assets/css/university.css',
     '/assets/js/app.js',
     '/assets/js/pwa.js',
     '/assets/images/logo.svg',
-    '/assets/images/logo.png',
-    '/assets/images/background-primary.png',
-    '/assets/images/background-secondary.png',
     // Аватари команди
     '/assets/images/avatars/Yevhenii.png',
     '/assets/images/avatars/Vova.png',
