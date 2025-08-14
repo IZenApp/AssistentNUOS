@@ -15,31 +15,7 @@ AssistentNUOS — сучасний веб-додаток для студенті
 ## Структура проекту
 
 - `index.html` — головна сторінка
-- `pages/` — внутрішні сторінки (about, university, schedule, offline, leadership, student-republic)
+- `pages/` — внутрішні сторінки (about, university, schedule, leadership, student-republic)
 - `assets/css/` — стили (components.css — общий стиль, offline.css — отдельный стиль для офлайн)
 - `assets/images/` — логотипы, иконки, аватары
 - `assets/js/` — скрипты
-
-## Запуск локально
-
-1. Клонуйте репозиторій:
-	```sh
-	git clone https://github.com/IZenApp/AssistentNUOS.git
-	```
-2. Откройте папку в VS Code или любом редакторе.
-3. Запустите локальный сервер (например, с помощью Live Server или Python):
-	```sh
-	# Python 3
-	python3 -m http.server 3000
-	```
-4. Перейдите на http://localhost:3000
-
-## Деплой на GitHub Pages
-
-1. Перейдите в настройки репозитория на GitHub
-2. Включите GitHub Pages для ветки `main` и папки `/`
-3. После публикации сайт будет доступен по адресу: `https://IZenApp.github.io/AssistentNUOS/`
-
-## Лицензия
-
-MIT
