@@ -15,7 +15,9 @@ if ('serviceWorker' in navigator) {
 // ===== SERVICE WORKER РЕЄСТРАЦІЯ =====
 async function registerServiceWorker() {
     try {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        const registration = await navigator.serviceWorker.register('./service-worker.js', {
+            scope: './'
+        });
         console.log('✅ Service Worker зареєстровано:', registration.scope);
         
         // Обробка оновлень
@@ -30,23 +32,45 @@ async function registerServiceWorker() {
             });
         });
         
+        // Перевіряємо чи є активний SW
+        if (registration.active) {
+            console.log('✅ Service Worker активний та готовий до роботи');
+        }
+        
         return registration;
     } catch (error) {
         console.error('❌ Помилка реєстрації Service Worker:', error);
+        showNotification('Помилка ініціалізації офлайн режиму', 'error');
         return null;
     }
 }
 
 function showUpdateNotification() {
-    showNotification('🔄 Доступне оновлення додатка! Натисніть для оновлення.', 'info', 10000, () => {
+    const updateBtn = document.createElement('button');
+    updateBtn.textContent = 'Оновити додаток';
+    updateBtn.style.cssText = `
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-left: 10px;
+    `;
+    
+    updateBtn.addEventListener('click', () => {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistration().then(reg => {
-                if (reg && reg.waiting) {
+                if (reg?.waiting) {
                     reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                    window.location.reload();
                 }
             });
         }
     });
+    
+    showNotification('🔄 Доступне оновлення додатка!', 'info', updateBtn);
 }
 
 // ===== INSTALL PROMPT =====
@@ -174,7 +198,7 @@ async function installPWA() {
 
 // ===== ПОВІДОМЛЕННЯ =====
 
-function showNotification(message, type = 'info') {
+function showNotification(message, type = 'info', extraElement = null) {
     // Створюємо контейнер для повідомлень якщо його немає
     let container = document.getElementById('pwa-notifications');
     if (!container) {
@@ -185,14 +209,13 @@ function showNotification(message, type = 'info') {
             top: 20px;
             right: 20px;
             z-index: 10000;
-            max-width: 300px;
+            max-width: 350px;
         `;
         document.body.appendChild(container);
     }
     
     // Створюємо повідомлення
     const notification = document.createElement('div');
-    notification.textContent = message;
     
     const colors = {
         success: '#4CAF50',
@@ -211,7 +234,40 @@ function showNotification(message, type = 'info') {
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         transform: translateX(100%);
         transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
     `;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = message;
+    notification.appendChild(messageDiv);
+    
+    if (extraElement) {
+        notification.appendChild(extraElement);
+    }
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕';
+    closeBtn.style.cssText = `
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0;
+        margin-left: 10px;
+    `;
+    closeBtn.addEventListener('click', () => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    });
+    notification.appendChild(closeBtn);
     
     container.appendChild(notification);
     
@@ -222,13 +278,15 @@ function showNotification(message, type = 'info') {
     
     // Автоматичне приховування
     setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 3000);
+        if (notification.parentNode) {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+    }, extraElement ? 10000 : 5000); // Більше часу якщо є кнопка
 }
 
 // ===== OFFLINE ІНДИКАТОР =====

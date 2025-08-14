@@ -1,48 +1,59 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v8.5';
+const CACHE_VERSION = 'v9.0';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
-    '/AssistentNUOS/',
-    '/AssistentNUOS/index.html',
-    '/AssistentNUOS/manifest.json',
-    '/AssistentNUOS/assets/css/components.css',
-    '/AssistentNUOS/assets/css/index.css',
-    '/AssistentNUOS/assets/css/main.css',
-    '/AssistentNUOS/assets/css/pages.css',
-    '/AssistentNUOS/assets/css/responsive.css',
-    '/AssistentNUOS/assets/css/offline.css',
-    '/AssistentNUOS/assets/css/about-new.css',
-    '/AssistentNUOS/assets/css/index-new.css',
-    '/AssistentNUOS/assets/css/leadership.css',
-    '/AssistentNUOS/assets/css/schedule.css',
-    '/AssistentNUOS/assets/css/university.css',
-    '/AssistentNUOS/assets/js/app.js',
-    '/AssistentNUOS/assets/js/pwa.js',
-    '/AssistentNUOS/assets/images/logo.svg',
-    '/AssistentNUOS/assets/images/pwa-icon-large.svg',
+    './',
+    './index.html',
+    './manifest.json',
+    './assets/css/components.css',
+    './assets/css/index.css',
+    './assets/css/main.css',
+    './assets/css/pages.css',
+    './assets/css/responsive.css',
+    './assets/css/offline.css',
+    './assets/css/about-new.css',
+    './assets/css/index-new.css',
+    './assets/css/leadership.css',
+    './assets/css/schedule.css',
+    './assets/css/university.css',
+    './assets/js/app.js',
+    './assets/js/pwa.js',
+    './assets/images/logo.svg',
+    './assets/images/pwa-icon-large.svg',
+    './assets/images/apple-touch-icon.png',
+    // PWA іконки
+    './assets/images/icons/icon-72x72.png',
+    './assets/images/icons/icon-96x96.png',
+    './assets/images/icons/icon-128x128.png',
+    './assets/images/icons/icon-144x144.png',
+    './assets/images/icons/icon-152x152.png',
+    './assets/images/icons/icon-192x192.png',
+    './assets/images/icons/icon-384x384.png',
+    './assets/images/icons/icon-512x512.png',
     // Аватари команди
-    '/AssistentNUOS/assets/images/avatars/Yevhenii.png',
-    '/AssistentNUOS/assets/images/avatars/Vova.png',
-    '/AssistentNUOS/assets/images/avatars/Katya.png',
-    '/AssistentNUOS/assets/images/avatars/Olena.png',
-    '/AssistentNUOS/assets/images/avatars/Olesya.jpeg',
-    '/AssistentNUOS/assets/images/avatars/Trushlyakov Evgen Ivanovich.png',
-    '/AssistentNUOS/assets/images/avatars/Slobodyan Sergiy Olegovich.png',
-    '/AssistentNUOS/assets/images/avatars/Pavlov Gennady Viktorovich.png',
-    '/AssistentNUOS/assets/images/avatars/Dubinsky Oleg Yuriyovich.png',
-    '/AssistentNUOS/assets/images/avatars/Mikhailov Mikhailo Serhiyovich.png',
+    './assets/images/avatars/Yevhenii.png',
+    './assets/images/avatars/Vova.png',
+    './assets/images/avatars/Katya.png',
+    './assets/images/avatars/Olena.png',
+    './assets/images/avatars/Olesya.jpeg',
+    './assets/images/avatars/Trushlyakov Evgen Ivanovich.png',
+    './assets/images/avatars/Slobodyan Sergiy Olegovich.png',
+    './assets/images/avatars/Pavlov Gennady Viktorovich.png',
+    './assets/images/avatars/Dubinsky Oleg Yuriyovich.png',
+    './assets/images/avatars/Mikhailov Mikhailo Serhiyovich.png',
     // Сторінки
-    '/AssistentNUOS/pages/about.html',
-    '/AssistentNUOS/pages/university.html',
-    '/AssistentNUOS/pages/schedule.html',
-    '/AssistentNUOS/pages/student-republic.html',
-    '/AssistentNUOS/pages/leadership.html',
-    '/AssistentNUOS/pages/offline.html'
+    './pages/about.html',
+    './pages/university.html',
+    './pages/schedule.html',
+    './pages/student-republic.html',
+    './pages/leadership.html',
+    './pages/offline.html',
+    './offline-test.html'
 ];
 
 // ===== ПОДІЇ SERVICE WORKER =====
@@ -56,8 +67,20 @@ self.addEventListener('install', event => {
             try {
                 const cache = await caches.open(CACHE_NAME);
                 console.log('📦 Кешування статичних ресурсів...');
-                await cache.addAll(STATIC_CACHE_URLS);
-                console.log('✅ Статичні ресурси закешовано');
+                
+                // Кешуємо ресурси по одному для кращого контролю помилок
+                const cachePromises = STATIC_CACHE_URLS.map(async url => {
+                    try {
+                        await cache.add(url);
+                        console.log(`✅ Закешовано: ${url}`);
+                    } catch (error) {
+                        console.warn(`⚠️ Не вдалося закешувати ${url}:`, error.message);
+                        // Продовжуємо з іншими файлами
+                    }
+                });
+                
+                await Promise.allSettled(cachePromises);
+                console.log('✅ Кешування завершено');
                 
                 // Форсуємо активацію нового SW
                 self.skipWaiting();
@@ -104,8 +127,10 @@ self.addEventListener('fetch', event => {
         return;
     }
     
-    // Ігноруємо запити до інших доменів
-    if (!event.request.url.startsWith(self.location.origin)) {
+    // Ігноруємо запити до інших доменів та chrome-extension
+    if (!event.request.url.startsWith(self.location.origin) || 
+        event.request.url.includes('chrome-extension') ||
+        event.request.url.includes('web-extension')) {
         return;
     }
     
@@ -150,22 +175,33 @@ async function handleFetch(request) {
     }
 }
 
-// Cache First для статичних ресурсів
+// Cache First для статичних ресурсів (улучшена версія)
 async function handleStaticResource(request) {
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
+        console.log('📦 Завантажено з кешу:', request.url);
         return cachedResponse;
     }
     
     try {
+        console.log('🌐 Завантажуємо з мережі:', request.url);
         const networkResponse = await fetch(request);
         if (networkResponse.ok) {
             const cache = await caches.open(CACHE_NAME);
+            // Клонуємо відповідь для кешування
             cache.put(request, networkResponse.clone());
+            console.log('💾 Додано до кешу:', request.url);
         }
         return networkResponse;
     } catch (error) {
         console.log('📱 Статичний ресурс недоступний офлайн:', request.url);
+        
+        // Спробуємо знайти альтернативу в кеші
+        const fallbackResponse = await findFallbackResource(request);
+        if (fallbackResponse) {
+            return fallbackResponse;
+        }
+        
         throw error;
     }
 }
@@ -187,7 +223,7 @@ async function handlePageRequest(request) {
         }
         
         // Повертаємо офлайн сторінку як fallback
-        return await caches.match('/pages/offline.html') || await caches.match('/index.html');
+        return await caches.match('./pages/offline.html') || await caches.match('./index.html');
     }
 }
 
@@ -248,7 +284,7 @@ function isImageResource(pathname) {
 async function handleOfflineResponse(request) {
     // Для HTML сторінок повертаємо офлайн сторінку
     if (request.headers.get('accept')?.includes('text/html')) {
-        return await caches.match('/pages/offline.html') || await caches.match('/index.html');
+        return await caches.match('./pages/offline.html') || await caches.match('./index.html');
     }
     
     // Для зображень повертаємо заглушку
@@ -280,6 +316,29 @@ async function createOfflineImageResponse() {
             'Cache-Control': 'no-cache'
         }
     });
+}
+
+// Функція для пошуку резервних ресурсів
+async function findFallbackResource(request) {
+    const url = new URL(request.url);
+    
+    // Для CSS файлів можемо повернути основний CSS
+    if (url.pathname.includes('.css')) {
+        return await caches.match('./assets/css/main.css');
+    }
+    
+    // Для JS файлів пробуємо основний скрипт
+    if (url.pathname.includes('.js')) {
+        return await caches.match('./assets/js/app.js');
+    }
+    
+    // Для зображень повертаємо логотип
+    if (isImageResource(url.pathname)) {
+        return await caches.match('./assets/images/logo.svg') || 
+               await createOfflineImageResponse();
+    }
+    
+    return null;
 }
 
 console.log('🎯 Service Worker завантажено для Асистента НУОС');

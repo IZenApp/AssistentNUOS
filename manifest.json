@@ -2,8 +2,8 @@
   "name": "Асистент НУОС - Помічник студента",
   "short_name": "НУОС Помічник",
   "description": "Офіційний студентський асистент Національного університету кораблебудування імені адмірала Макарова",
-  "start_url": "/AssistentNUOS/index.html?v=2025081422",
-  "scope": "/AssistentNUOS/",
+  "start_url": "./index.html?v=2025081422",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
@@ -37,67 +37,67 @@
   },
   "icons": [
     {
-      "src": "/AssistentNUOS/assets/images/pwa-icon-large.svg",
+      "src": "./assets/images/pwa-icon-large.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/AssistentNUOS/assets/images/pwa-icon-large.svg",
+      "src": "./assets/images/pwa-icon-large.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/pwa-icon-large.svg",
+      "src": "./assets/images/pwa-icon-large.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-72x72.png",
+      "src": "./assets/images/icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-96x96.png",
+      "src": "./assets/images/icons/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-128x128.png",
+      "src": "./assets/images/icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-144x144.png",
+      "src": "./assets/images/icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-152x152.png",
+      "src": "./assets/images/icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-192x192.png",
+      "src": "./assets/images/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-384x384.png",
+      "src": "./assets/images/icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/AssistentNUOS/assets/images/icons/icon-512x512.png",
+      "src": "./assets/images/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -108,29 +108,29 @@
       "name": "Розклад дзвінків",
       "short_name": "Розклад",
       "description": "Переглянути розклад дзвінків",
-      "url": "/AssistentNUOS/pages/schedule.html",
-      "icons": [{ "src": "/AssistentNUOS/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "url": "./pages/schedule.html",
+      "icons": [{ "src": "./assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Студентська республіка",
       "short_name": "Студреспубліка",
       "description": "Інформація про студентську республіку",
-      "url": "/AssistentNUOS/pages/student-republic.html",
-      "icons": [{ "src": "/AssistentNUOS/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "url": "./pages/student-republic.html",
+      "icons": [{ "src": "./assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Про університет",
       "short_name": "Про НУК",
       "description": "Інформація про університет",
-      "url": "/AssistentNUOS/pages/university.html",
-      "icons": [{ "src": "/AssistentNUOS/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "url": "./pages/university.html",
+      "icons": [{ "src": "./assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Керівництво",
       "short_name": "Керівництво",
       "description": "Керівництво студентської республіки",
-      "url": "/AssistentNUOS/pages/leadership.html",
-      "icons": [{ "src": "/AssistentNUOS/assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "url": "./pages/leadership.html",
+      "icons": [{ "src": "./assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ]
 }

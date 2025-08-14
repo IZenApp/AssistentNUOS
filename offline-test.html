@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест офлайн режиму | AssistentNUOS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .online { background: #4CAF50; }
+        .offline { background: #F44336; }
+        .test-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        .test-button:hover {
+            background: #f0f0f0;
+        }
+        .results {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .success { color: #4CAF50; }
+        .error { color: #F44336; }
+        .info { color: #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тест офлайн режиму AssistentNUOS</h1>
+        
+        <div id="connectionStatus" class="status">
+            Перевірка статусу з'єднання...
+        </div>
+        
+        <div>
+            <h3>Тести кешування:</h3>
+            <button class="test-button" onclick="testMainPage()">Тест головної сторінки</button>
+            <button class="test-button" onclick="testSchedulePage()">Тест сторінки розкладу</button>
+            <button class="test-button" onclick="testImages()">Тест зображень</button>
+            <button class="test-button" onclick="testCSS()">Тест CSS файлів</button>
+            <button class="test-button" onclick="testJS()">Тест JS файлів</button>
+            <button class="test-button" onclick="testManifest()">Тест манифесту</button>
+            <button class="test-button" onclick="clearCache()">Очистити кеш</button>
+        </div>
+        
+        <div>
+            <h3>Симуляція офлайн режиму:</h3>
+            <button class="test-button" onclick="simulateOffline()">Симулювати офлайн</button>
+            <button class="test-button" onclick="simulateOnline()">Симулювати онлайн</button>
+        </div>
+        
+        <div class="results" id="testResults">
+            <p class="info">Результати тестів будуть відображатися тут...</p>
+        </div>
+        
+        <div>
+            <h3>Швидкі посилання для тестування:</h3>
+            <a href="./index.html" class="test-button" style="text-decoration: none; display: inline-block;">Головна</a>
+            <a href="./pages/schedule.html" class="test-button" style="text-decoration: none; display: inline-block;">Розклад</a>
+            <a href="./pages/offline.html" class="test-button" style="text-decoration: none; display: inline-block;">Офлайн сторінка</a>
+        </div>
+    </div>
+
+    <script>
+        // Логування результатів
+        function log(message, type = 'info') {
+            const results = document.getElementById('testResults');
+            const time = new Date().toLocaleTimeString();
+            results.innerHTML += `<div class="${type}">[${time}] ${message}</div>`;
+            results.scrollTop = results.scrollHeight;
+        }
+
+        // Оновлення статусу з'єднання
+        function updateConnectionStatus() {
+            const status = document.getElementById('connectionStatus');
+            if (navigator.onLine) {
+                status.className = 'status online';
+                status.textContent = '🟢 Онлайн - З\'єднання активне';
+            } else {
+                status.className = 'status offline';
+                status.textContent = '🔴 Офлайн - Немає з\'єднання';
+            }
+        }
+
+        // Тест головної сторінки
+        async function testMainPage() {
+            log('Тестування головної сторінки...', 'info');
+            try {
+                const response = await fetch('./index.html');
+                if (response.ok) {
+                    log('✅ Головна сторінка доступна', 'success');
+                } else {
+                    log(`❌ Помилка завантаження головної сторінки: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Мережева помилка: ${error.message}`, 'error');
+            }
+        }
+
+        // Тест сторінки розкладу
+        async function testSchedulePage() {
+            log('Тестування сторінки розкладу...', 'info');
+            try {
+                const response = await fetch('./pages/schedule.html');
+                if (response.ok) {
+                    log('✅ Сторінка розкладу доступна', 'success');
+                } else {
+                    log(`❌ Помилка завантаження сторінки розкладу: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Мережева помилка: ${error.message}`, 'error');
+            }
+        }
+
+        // Тест зображень
+        async function testImages() {
+            log('Тестування зображень...', 'info');
+            const images = [
+                './assets/images/logo.svg',
+                './assets/images/pwa-icon-large.svg',
+                './assets/images/icons/icon-192x192.png'
+            ];
+            
+            for (const img of images) {
+                try {
+                    const response = await fetch(img);
+                    if (response.ok) {
+                        log(`✅ Зображення доступне: ${img}`, 'success');
+                    } else {
+                        log(`❌ Помилка завантаження зображення: ${img}`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ Мережева помилка для ${img}: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // Тест CSS файлів
+        async function testCSS() {
+            log('Тестування CSS файлів...', 'info');
+            const cssFiles = [
+                './assets/css/main.css',
+                './assets/css/components.css',
+                './assets/css/index.css'
+            ];
+            
+            for (const css of cssFiles) {
+                try {
+                    const response = await fetch(css);
+                    if (response.ok) {
+                        log(`✅ CSS файл доступний: ${css}`, 'success');
+                    } else {
+                        log(`❌ Помилка завантаження CSS: ${css}`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ Мережева помилка для ${css}: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // Тест JS файлів
+        async function testJS() {
+            log('Тестування JS файлів...', 'info');
+            const jsFiles = [
+                './assets/js/app.js',
+                './assets/js/pwa.js'
+            ];
+            
+            for (const js of jsFiles) {
+                try {
+                    const response = await fetch(js);
+                    if (response.ok) {
+                        log(`✅ JS файл доступний: ${js}`, 'success');
+                    } else {
+                        log(`❌ Помилка завантаження JS: ${js}`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ Мережева помилка для ${js}: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // Тест манифесту
+        async function testManifest() {
+            log('Тестування манифесту...', 'info');
+            try {
+                const response = await fetch('./manifest.json');
+                if (response.ok) {
+                    const manifest = await response.json();
+                    log('✅ Манифест доступний', 'success');
+                    log(`📱 Назва додатка: ${manifest.name}`, 'info');
+                } else {
+                    log(`❌ Помилка завантаження манифесту: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Мережева помилка манифесту: ${error.message}`, 'error');
+            }
+        }
+
+        // Очищення кешу
+        async function clearCache() {
+            if ('caches' in window) {
+                log('Очищення кешу...', 'info');
+                const cacheNames = await caches.keys();
+                const deletePromises = cacheNames.map(name => caches.delete(name));
+                await Promise.all(deletePromises);
+                log(`✅ Видалено ${cacheNames.length} кешів`, 'success');
+            } else {
+                log('❌ Cache API не підтримується', 'error');
+            }
+        }
+
+        // Симуляція офлайн режиму
+        function simulateOffline() {
+            log('🔌 Симуляція офлайн режиму...', 'info');
+            // Ця функція показує що робить service worker
+            log('💡 Service Worker буде перехоплювати запити та повертати закешовані версії', 'info');
+            log('💡 Відключіть Wi-Fi/мобільні дані для реального тестування', 'info');
+        }
+
+        // Симуляція онлайн режиму
+        function simulateOnline() {
+            log('🌐 Симуляція онлайн режиму...', 'info');
+            log('💡 Service Worker буде намагатися завантажити з мережі та оновлювати кеш', 'info');
+        }
+
+        // Ініціалізація
+        window.addEventListener('load', () => {
+            updateConnectionStatus();
+            log('🚀 Тест офлайн режиму ініціалізовано', 'info');
+            
+            // Перевірка Service Worker
+            if ('serviceWorker' in navigator) {
+                log('✅ Service Worker підтримується', 'success');
+                navigator.serviceWorker.getRegistration().then(reg => {
+                    if (reg) {
+                        log('✅ Service Worker зареєстровано', 'success');
+                    } else {
+                        log('⚠️ Service Worker не зареєстровано', 'error');
+                    }
+                });
+            } else {
+                log('❌ Service Worker не підтримується браузером', 'error');
+            }
+        });
+
+        // Відстеження змін з'єднання
+        window.addEventListener('online', () => {
+            updateConnectionStatus();
+            log('🟢 З\'єднання відновлено', 'success');
+        });
+
+        window.addEventListener('offline', () => {
+            updateConnectionStatus();
+            log('🔴 З\'єднання втрачено', 'error');
+        });
+    </script>
+</body>
+</html>
