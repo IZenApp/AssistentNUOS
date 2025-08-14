@@ -1,47 +1,47 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v7.8';
+const CACHE_VERSION = 'v7.9';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/assets/css/components.css',
-    '/assets/css/index.css',
-    '/assets/css/main.css',
-    '/assets/css/pages.css',
-    '/assets/css/responsive.css',
-    '/assets/css/offline.css',
-    '/assets/css/about-new.css',
-    '/assets/css/index-new.css',
-    '/assets/css/leadership.css',
-    '/assets/css/schedule.css',
-    '/assets/css/university.css',
-    '/assets/js/app.js',
-    '/assets/js/pwa.js',
-    '/assets/images/logo.svg',
+    '/AssistentNUOS/',
+    '/AssistentNUOS/index.html',
+    '/AssistentNUOS/manifest.json',
+    '/AssistentNUOS/assets/css/components.css',
+    '/AssistentNUOS/assets/css/index.css',
+    '/AssistentNUOS/assets/css/main.css',
+    '/AssistentNUOS/assets/css/pages.css',
+    '/AssistentNUOS/assets/css/responsive.css',
+    '/AssistentNUOS/assets/css/offline.css',
+    '/AssistentNUOS/assets/css/about-new.css',
+    '/AssistentNUOS/assets/css/index-new.css',
+    '/AssistentNUOS/assets/css/leadership.css',
+    '/AssistentNUOS/assets/css/schedule.css',
+    '/AssistentNUOS/assets/css/university.css',
+    '/AssistentNUOS/assets/js/app.js',
+    '/AssistentNUOS/assets/js/pwa.js',
+    '/AssistentNUOS/assets/images/logo.svg',
     // Аватари команди
-    '/assets/images/avatars/Yevhenii.png',
-    '/assets/images/avatars/Vova.png',
-    '/assets/images/avatars/Katya.png',
-    '/assets/images/avatars/Olena.png',
-    '/assets/images/avatars/Olesya.jpeg',
-    '/assets/images/avatars/Trushlyakov Evgen Ivanovich.png',
-    '/assets/images/avatars/Slobodyan Sergiy Olegovich.png',
-    '/assets/images/avatars/Pavlov Gennady Viktorovich.png',
-    '/assets/images/avatars/Dubinsky Oleg Yuriyovich.png',
-    '/assets/images/avatars/Mikhailov Mikhailo Serhiyovich.png',
+    '/AssistentNUOS/assets/images/avatars/Yevhenii.png',
+    '/AssistentNUOS/assets/images/avatars/Vova.png',
+    '/AssistentNUOS/assets/images/avatars/Katya.png',
+    '/AssistentNUOS/assets/images/avatars/Olena.png',
+    '/AssistentNUOS/assets/images/avatars/Olesya.jpeg',
+    '/AssistentNUOS/assets/images/avatars/Trushlyakov Evgen Ivanovich.png',
+    '/AssistentNUOS/assets/images/avatars/Slobodyan Sergiy Olegovich.png',
+    '/AssistentNUOS/assets/images/avatars/Pavlov Gennady Viktorovich.png',
+    '/AssistentNUOS/assets/images/avatars/Dubinsky Oleg Yuriyovich.png',
+    '/AssistentNUOS/assets/images/avatars/Mikhailov Mikhailo Serhiyovich.png',
     // Сторінки
-    '/pages/about.html',
-    '/pages/university.html',
-    '/pages/schedule.html',
-    '/pages/student-republic.html',
-    '/pages/leadership.html',
-    '/pages/offline.html'
+    '/AssistentNUOS/pages/about.html',
+    '/AssistentNUOS/pages/university.html',
+    '/AssistentNUOS/pages/schedule.html',
+    '/AssistentNUOS/pages/student-republic.html',
+    '/AssistentNUOS/pages/leadership.html',
+    '/AssistentNUOS/pages/offline.html'
 ];
 
 // ===== ПОДІЇ SERVICE WORKER =====
