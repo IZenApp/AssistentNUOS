@@ -1,6 +1,6 @@
 //const CACHE_VERSION = 'v7.0';===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v6.6';
+const CACHE_VERSION = 'v6.7';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 
