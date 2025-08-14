@@ -55,23 +55,21 @@ function highlightCurrentPage() {
 }
 
 function createMobileMenu() {
-    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     
-    if (!mobileToggle || !navMenu) return;
+    if (!navToggle || !navMenu) return;
     
-    // Додаємо обробник
-    mobileToggle.addEventListener('click', () => {
-        const isOpen = navMenu.classList.contains('show');
+    // Обробник кліку на бургер меню
+    navToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
         
-        if (isOpen) {
-            navMenu.classList.remove('show');
-            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+        // Блокуємо скрол body коли меню відкрите
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
         } else {
-            navMenu.classList.add('show');
-            mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
-            mobileToggle.setAttribute('aria-label', 'Закрити меню');
+            document.body.style.overflow = '';
         }
     });
     
@@ -79,18 +77,27 @@ function createMobileMenu() {
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('show');
-            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
     
     // Закриваємо меню при кліку поза ним
     document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-            navMenu.classList.remove('show');
-            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileToggle.setAttribute('aria-label', 'Відкрити меню');
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Закриваємо меню при зміні розміру екрану
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
         }
     });
 }

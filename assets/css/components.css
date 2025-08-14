@@ -230,16 +230,24 @@ main {
     .nav-menu,
     .navbar-nav {
         position: fixed !important;
-        top: 65px !important;
+        top: 70px !important;
         left: 0 !important;
+        right: 0 !important;
         width: 100% !important;
-        background: rgba(0, 0, 0, 0.95) !important;
+        height: calc(100vh - 70px) !important;
+        background: rgba(26, 26, 46, 0.98) !important;
         backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
         flex-direction: column !important;
         gap: 0 !important;
-        padding: 1.5rem 0 !important;
+        padding: 2rem 1rem !important;
+        margin: 0 !important;
         transform: translateX(-100%) !important;
-        transition: transform 0.3s ease !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
     }
 
     .nav-menu.active,
@@ -250,26 +258,72 @@ main {
     .nav-link,
     .nav-item {
         width: 100% !important;
-        justify-content: center !important;
-        padding: 0.8rem 2rem !important;
-        border-radius: 0 !important;
-        font-size: 0.9rem !important;
+        max-width: 300px !important;
+        margin: 0 auto 0.5rem auto !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 1rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        transition: all 0.3s ease !important;
+        text-decoration: none !important;
+        color: white !important;
+    }
+
+    .nav-link:hover,
+    .nav-item:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        transform: translateY(-2px) !important;
+        color: #fff !important;
+    }
+
+    .nav-link.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+    }
+
+    .nav-link i,
+    .nav-item i {
+        margin-right: 0.75rem !important;
+        font-size: 1.1rem !important;
+        width: 20px !important;
+        text-align: center !important;
     }
 
     .nav-toggle {
         display: flex !important;
+        position: relative !important;
+        z-index: 10000 !important;
+        padding: 8px !important;
+        border-radius: 6px !important;
+        transition: background 0.3s ease !important;
+    }
+
+    .nav-toggle:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
     }
 
     .nav-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(4px, 4px) !important;
+        transform: rotate(45deg) translate(5px, 5px) !important;
     }
 
     .nav-toggle.active span:nth-child(2) {
         opacity: 0 !important;
+        transform: scale(0) !important;
     }
 
     .nav-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -5px) !important;
+        transform: rotate(-45deg) translate(7px, -6px) !important;
+    }
+
+    /* Блокування скролу при відкритому меню */
+    body.menu-open {
+        overflow: hidden !important;
     }
 }
 
