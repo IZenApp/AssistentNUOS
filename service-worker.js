@@ -24,6 +24,7 @@ const STATIC_CACHE_URLS = [
     '/AssistentNUOS/assets/js/app.js',
     '/AssistentNUOS/assets/js/pwa.js',
     '/AssistentNUOS/assets/images/logo.svg',
+    '/AssistentNUOS/assets/images/app-icon.svg',
     // Аватари команди
     '/AssistentNUOS/assets/images/avatars/Yevhenii.png',
     '/AssistentNUOS/assets/images/avatars/Vova.png',
