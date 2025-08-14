@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест навігації - AssistentNUOS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        .test-button.fail {
+            background: #f44336;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+        }
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Тест функціональності AssistentNUOS</h1>
+    
+    <div class="test-section">
+        <h2>📱 Тест мобільного меню</h2>
+        <button class="test-button" onclick="testMobileMenu()">Тестувати мобільне меню</button>
+        <div id="mobileMenuResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Тест PWA функціональності</h2>
+        <button class="test-button" onclick="testPWA()">Тестувати PWA</button>
+        <div id="pwaResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 Тест переходів між сторінками</h2>
+        <button class="test-button" onclick="testNavigation()">Тестувати навігацію</button>
+        <div id="navigationResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Service Worker статус</h2>
+        <button class="test-button" onclick="testServiceWorker()">Перевірити Service Worker</button>
+        <div id="serviceWorkerResult" class="test-result"></div>
+    </div>
+
+    <script>
+        function showResult(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            element.className = `test-result ${isSuccess ? 'success' : 'error'}`;
+        }
+
+        function testMobileMenu() {
+            try {
+                // Симулюємо роботу мобільного меню
+                const hasToggleButton = document.querySelector('.mobile-menu-toggle');
+                const hasNavMenu = document.querySelector('.navbar-nav');
+                
+                if (hasToggleButton && hasNavMenu) {
+                    showResult('mobileMenuResult', '✅ Структура мобільного меню знайдена');
+                } else {
+                    showResult('mobileMenuResult', '❌ Мобільне меню не знайдено. Перевірте index.html', false);
+                }
+            } catch (error) {
+                showResult('mobileMenuResult', `❌ Помилка: ${error.message}`, false);
+            }
+        }
+
+        function testPWA() {
+            try {
+                const results = [];
+                
+                // Перевірка manifest
+                const manifest = document.querySelector('link[rel="manifest"]');
+                results.push(manifest ? '✅ Manifest знайдено' : '❌ Manifest не знайдено');
+                
+                // Перевірка Service Worker
+                if ('serviceWorker' in navigator) {
+                    results.push('✅ Service Worker підтримується');
+                } else {
+                    results.push('❌ Service Worker не підтримується');
+                }
+                
+                // Перевірка PWA criteria
+                const isHTTPS = location.protocol === 'https:' || location.hostname === 'localhost';
+                results.push(isHTTPS ? '✅ HTTPS або localhost' : '❌ Потрібен HTTPS');
+                
+                showResult('pwaResult', results.join('<br>'));
+            } catch (error) {
+                showResult('pwaResult', `❌ Помилка: ${error.message}`, false);
+            }
+        }
+
+        function testNavigation() {
+            try {
+                const pages = [
+                    { name: 'Головна', url: '../index.html' },
+                    { name: 'Про нас', url: '../pages/about.html' },
+                    { name: 'Університет', url: '../pages/university.html' },
+                    { name: 'Розклад', url: '../pages/schedule.html' },
+                    { name: 'Керівництво', url: '../pages/leadership.html' },
+                    { name: 'Студентське самоврядування', url: '../pages/student-republic.html' }
+                ];
+                
+                let results = '📋 Список сторінок:<br>';
+                pages.forEach(page => {
+                    results += `<a href="${page.url}" target="_blank" style="color: #4CAF50;">${page.name}</a><br>`;
+                });
+                
+                showResult('navigationResult', results);
+            } catch (error) {
+                showResult('navigationResult', `❌ Помилка: ${error.message}`, false);
+            }
+        }
+
+        function testServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    if (registrations.length > 0) {
+                        const sw = registrations[0];
+                        let status = 'Очікує';
+                        if (sw.active) {
+                            status = 'Активний';
+                        } else if (sw.installing) {
+                            status = 'Встановлюється';
+                        }
+                        showResult('serviceWorkerResult', `✅ Service Worker: ${status}<br>📂 Scope: ${sw.scope}`);
+                    } else {
+                        showResult('serviceWorkerResult', '❌ Service Worker не зареєстрований', false);
+                    }
+                }).catch(error => {
+                    showResult('serviceWorkerResult', `❌ Помилка: ${error.message}`, false);
+                });
+            } else {
+                showResult('serviceWorkerResult', '❌ Service Worker не підтримується браузером', false);
+            }
+        }
+
+        // Автоматичний тест при завантаженні
+        window.addEventListener('load', () => {
+            testServiceWorker();
+        });
+    </script>
+
+    <div class="test-section">
+        <h2>📝 Інструкції для тестування</h2>
+        <ol>
+            <li><strong>Мобільне меню:</strong> Відкрийте головну сторінку і натисніть ☰ (три лінії)</li>
+            <li><strong>PWA встановлення:</strong> В адресному рядку має з'явитися іконка встановлення</li>
+            <li><strong>Навігація:</strong> Спробуйте перейти на різні сторінки</li>
+            <li><strong>Офлайн режим:</strong> Відключіть інтернет і перезавантажте сторінку</li>
+        </ol>
+        
+        <h3>🔧 Якщо щось не працює:</h3>
+        <ul>
+            <li>Очистіть кеш браузера (Ctrl+Shift+R)</li>
+            <li>Перевірте консоль браузера (F12)</li>
+            <li>Переконайтесь що JavaScript увімкнений</li>
+            <li>Спробуйте інший браузер</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🌐 Посилання</h2>
+        <p>
+            <a href="../index.html" style="color: #4CAF50;">← Повернутися на головну</a> |
+            <a href="https://izenapp.github.io/AssistentNUOS/" style="color: #4CAF50;">🌍 Живий сайт</a>
+        </p>
+    </div>
+</body>
+</html>
