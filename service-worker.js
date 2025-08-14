@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v8.2';
+const CACHE_VERSION = 'v8.4';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
@@ -24,7 +24,7 @@ const STATIC_CACHE_URLS = [
     '/AssistentNUOS/assets/js/app.js',
     '/AssistentNUOS/assets/js/pwa.js',
     '/AssistentNUOS/assets/images/logo.svg',
-    '/AssistentNUOS/assets/images/app-icon.svg',
+    '/AssistentNUOS/assets/images/pwa-icon.svg',
     // Аватари команди
     '/AssistentNUOS/assets/images/avatars/Yevhenii.png',
     '/AssistentNUOS/assets/images/avatars/Vova.png',

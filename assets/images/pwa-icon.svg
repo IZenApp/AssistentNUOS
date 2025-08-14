@@ -1,0 +1,105 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Основной градиент фона -->
+    <radialGradient id="mainGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#4FACFE"/>
+      <stop offset="50%" style="stop-color:#00F2FE"/>
+      <stop offset="100%" style="stop-color:#764BA2"/>
+    </radialGradient>
+    
+    <!-- Градиент для текста -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="50%" style="stop-color:#E3F2FD"/>
+      <stop offset="100%" style="stop-color:#BBDEFB"/>
+    </linearGradient>
+    
+    <!-- Тени для текста -->
+    <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    
+    <!-- Внутренняя тень -->
+    <filter id="innerGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Глянцевый эффект -->
+    <linearGradient id="glossGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.3)"/>
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.1)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Основной фон -->
+  <rect width="512" height="512" rx="90" ry="90" fill="url(#mainGradient)"/>
+  
+  <!-- Декоративные элементы -->
+  <circle cx="120" cy="120" r="15" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="400" cy="150" r="20" fill="rgba(255,255,255,0.15)"/>
+  <circle cx="450" cy="350" r="12" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="80" cy="380" r="18" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Звездочки -->
+  <polygon points="180,80 185,95 200,95 188,105 193,120 180,110 167,120 172,105 160,95 175,95" fill="rgba(255,255,255,0.3)"/>
+  <polygon points="380,400 383,408 391,408 385,413 388,421 380,416 372,421 375,413 369,408 377,408" fill="rgba(255,255,255,0.25)"/>
+  
+  <!-- Главный текст "НУК" -->
+  <text x="256" y="180" 
+        font-family="Arial, sans-serif" 
+        font-size="120" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="url(#textGradient)" 
+        filter="url(#textShadow)"
+        stroke="#1565C0" 
+        stroke-width="2">НУК</text>
+  
+  <!-- Подзаголовок "Assistant" -->
+  <text x="256" y="240" 
+        font-family="Arial, sans-serif" 
+        font-size="48" 
+        font-weight="600" 
+        text-anchor="middle" 
+        fill="url(#textGradient)" 
+        filter="url(#textShadow)"
+        opacity="0.95">Assistant</text>
+  
+  <!-- Корабль (упрощенный, но заметный) -->
+  <g transform="translate(256, 320) scale(3)">
+    <!-- Корпус корабля -->
+    <path d="M-20 10 L0 -5 L20 10 L15 20 L-15 20 Z" fill="rgba(255,255,255,0.9)" stroke="#1565C0" stroke-width="1"/>
+    
+    <!-- Мачта -->
+    <line x1="0" y1="-5" x2="0" y2="-25" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+    
+    <!-- Парус -->
+    <path d="M2 -20 L2 -5 L18 -10 L18 -22 Z" fill="rgba(255,255,255,0.8)" stroke="#1565C0" stroke-width="0.5"/>
+    
+    <!-- Флаг -->
+    <path d="M2 -24 L2 -20 L12 -22 Z" fill="#FF6B6B"/>
+    
+    <!-- Волны -->
+    <path d="M-30 25 Q-20 22 -10 25 T10 25 T30 25" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Версия/год внизу -->
+  <text x="256" y="460" 
+        font-family="Arial, sans-serif" 
+        font-size="28" 
+        font-weight="normal" 
+        text-anchor="middle" 
+        fill="rgba(255,255,255,0.8)" 
+        filter="url(#textShadow)">2025</text>
+  
+  <!-- Глянцевый эффект сверху -->
+  <rect width="512" height="200" rx="90" ry="90" fill="url(#glossGradient)" opacity="0.3"/>
+  
+  <!-- Внешняя обводка -->
+  <rect width="512" height="512" rx="90" ry="90" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+</svg>
