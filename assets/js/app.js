@@ -278,11 +278,14 @@ function showUpdateNotification() {
 }
 
 // ===== ОФЛАЙН ДЕТЕКЦІЯ =====
+let offlineNotificationShown = false;
+
 function initializeOfflineDetection() {
     updateOnlineStatus();
     
     window.addEventListener('online', () => {
         isOnline = true;
+        offlineNotificationShown = false;
         updateOnlineStatus();
         showNotification('🌐 З\'єднання відновлено!', 'success');
     });
@@ -290,7 +293,10 @@ function initializeOfflineDetection() {
     window.addEventListener('offline', () => {
         isOnline = false;
         updateOnlineStatus();
-        showNotification('🌐 Втрачено з\'єднання з інтернетом', 'warning');
+        if (!offlineNotificationShown) {
+            showNotification('🌐 Втрачено з\'єднання з інтернетом', 'warning');
+            offlineNotificationShown = true;
+        }
     });
 }
 
@@ -310,7 +316,7 @@ function updateOnlineStatus() {
                         <strong>Немає підключення до інтернету</strong>
                         <span>Не хвилюйтесь! Більшість функцій працюють офлайн завдяки PWA технології</span>
                     </div>
-                    <button class="offline-banner-close" onclick="this.parentElement.remove()">
+                    <button class="offline-banner-close" onclick="this.parentElement.parentElement.remove()">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -322,7 +328,11 @@ function updateOnlineStatus() {
     } else {
         if (offlineBanner) {
             offlineBanner.classList.remove('show');
-            setTimeout(() => offlineBanner.remove(), 300);
+            setTimeout(() => {
+                if (offlineBanner.parentNode) {
+                    offlineBanner.remove();
+                }
+            }, 300);
         }
     }
 }

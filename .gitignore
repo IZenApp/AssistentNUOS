@@ -53,3 +53,15 @@ workbox-*.js.map
 # Temporary files
 *.tmp
 *.temp
+
+# Development tools
+tools/*.log
+tools/temp/
+
+# Test outputs
+tests/screenshots/
+tests/reports/
+
+# Documentation drafts
+docs/drafts/
+docs/*.draft.md

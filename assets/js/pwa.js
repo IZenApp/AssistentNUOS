@@ -402,13 +402,15 @@ function createOfflineIndicator() {
 
 // Моніторинг з'єднання
 let offlineIndicator;
+let pwaNотificationShown = false;
 
 window.addEventListener('online', () => {
     console.log('🌐 З\'єднання відновлено');
+    pwaNотificationShown = false;
     if (offlineIndicator) {
         offlineIndicator.style.transform = 'translateY(-100%)';
     }
-    showNotification('🌐 З\'єднання відновлено!', 'success');
+    // Уведомление показывается только в app.js
 });
 
 window.addEventListener('offline', () => {
@@ -417,7 +419,7 @@ window.addEventListener('offline', () => {
         offlineIndicator = createOfflineIndicator();
     }
     offlineIndicator.style.transform = 'translateY(0)';
-    showNotification('📱 Перехід в офлайн режим', 'info');
+    // Уведомление показывается только в app.js, избегаем дублирования
 });
 
 // ===== ОНОВЛЕННЯ PWA =====

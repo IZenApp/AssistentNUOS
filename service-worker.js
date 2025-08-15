@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v9.2';
+const CACHE_VERSION = 'v9.4';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
@@ -54,7 +54,8 @@ const STATIC_CACHE_URLS = [
     './pages/student-republic.html',
     './pages/leadership.html',
     './pages/offline.html',
-    './offline-test.html'
+    './tests/icon-test.html',
+    './tests/offline-test.html'
 ];
 
 // ===== ПОДІЇ SERVICE WORKER =====
