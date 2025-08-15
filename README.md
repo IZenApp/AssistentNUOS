@@ -391,7 +391,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ## 🚢 Створено з ❤️ для студентів НУК
 
-### 📊 **Версія 7.6** | 🗓️ **2025** | 📄 **MIT License**
+### 📊 **Версія 9.2** | 🗓️ **2025** | 📄 **MIT License**
 
 [![⭐ Star on GitHub](https://img.shields.io/github/stars/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS)
 [![🍴 Fork](https://img.shields.io/github/forks/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS/fork)
