@@ -1,9 +1,49 @@
-# Convert SVG to PNG icons script
-# This creates PWA icons from the SVG logo
+#!/bin/bash
 
-# You can use this online converter: https://convertio.co/svg-png/
-# Or install ImageMagick/Inkscape and use command line
+# Script to convert SVG to various PNG sizes for PWA icons
+# Make sure you have ImageMagick installed: brew install imagemagick
 
-# For now, let's create a simple placeholder
-echo "PWA Icons needed - use online converter to create PNG from logo.svg"
-echo "Required sizes: 72x72, 96x96, 128x128, 144x144, 152x152, 192x192, 384x384, 512x512"
+echo "Converting SVG to PNG icons..."
+
+# Source SVG file
+SVG_FILE="../pwa-icon-large.svg"
+
+# Check if source SVG exists
+if [ ! -f "$SVG_FILE" ]; then
+    echo "Error: $SVG_FILE not found!"
+    exit 1
+fi
+
+# Convert to different sizes
+echo "Generating icon-72x72.png..."
+magick "$SVG_FILE" -resize 72x72 icon-72x72.png
+
+echo "Generating icon-96x96.png..."
+magick "$SVG_FILE" -resize 96x96 icon-96x96.png
+
+echo "Generating icon-128x128.png..."
+magick "$SVG_FILE" -resize 128x128 icon-128x128.png
+
+echo "Generating icon-144x144.png..."
+magick "$SVG_FILE" -resize 144x144 icon-144x144.png
+
+echo "Generating icon-152x152.png..."
+magick "$SVG_FILE" -resize 152x152 icon-152x152.png
+
+echo "Generating icon-180x180.png (iOS)..."
+magick "$SVG_FILE" -resize 180x180 icon-180x180.png
+
+echo "Generating icon-192x192.png..."
+magick "$SVG_FILE" -resize 192x192 icon-192x192.png
+
+echo "Generating icon-384x384.png..."
+magick "$SVG_FILE" -resize 384x384 icon-384x384.png
+
+echo "Generating icon-512x512.png..."
+magick "$SVG_FILE" -resize 512x512 icon-512x512.png
+
+echo "Creating Apple touch icon..."
+cp icon-180x180.png ../apple-touch-icon.png
+
+echo "All icons generated successfully!"
+echo "Don't forget to update your manifest.json with the new icon paths."

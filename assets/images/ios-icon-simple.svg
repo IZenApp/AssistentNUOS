@@ -1,0 +1,44 @@
+<svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- Простой градиент фона для iOS -->
+  <defs>
+    <linearGradient id="iosGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ECDC4"/>
+      <stop offset="50%" style="stop-color:#45B7D1"/>
+      <stop offset="100%" style="stop-color:#667eea"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Округленный фон -->
+  <rect width="180" height="180" rx="40" ry="40" fill="url(#iosGradient)"/>
+  
+  <!-- Простой текст НУК -->
+  <text x="90" y="75" 
+        font-family="Arial, sans-serif" 
+        font-size="48" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="#FFFFFF">НУК</text>
+  
+  <!-- Подзаголовок -->
+  <text x="90" y="105" 
+        font-family="Arial, sans-serif" 
+        font-size="18" 
+        font-weight="normal" 
+        text-anchor="middle" 
+        fill="#FFFFFF">ASSISTANT</text>
+  
+  <!-- Простой корабль -->
+  <g transform="translate(90, 135) scale(2)">
+    <path d="M-12 5 L0 -3 L12 5 L10 12 L-10 12 Z" fill="#FFFFFF"/>
+    <line x1="0" y1="-3" x2="0" y2="-12" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M1 -10 L1 -3 L10 -5 L10 -12 Z" fill="#FFD93D"/>
+  </g>
+  
+  <!-- Год -->
+  <text x="90" y="165" 
+        font-family="Arial, sans-serif" 
+        font-size="14" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="#FFFFFF">2025</text>
+</svg>

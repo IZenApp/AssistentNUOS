@@ -337,7 +337,8 @@
         function updateScheduleStatus() {
             const now = new Date();
             const currentTime = now.getHours() * 60 + now.getMinutes();
-            
+            const dayOfWeek = now.getDay(); // 0 - воскресенье, 6 - суббота
+
             const schedule = [
                 { start: '09:00', end: '10:20', name: '1 пара' },
                 { start: '10:30', end: '11:50', name: '2 пара' },
@@ -349,30 +350,36 @@
 
             let currentPeriod = '';
             let nextPeriod = '';
-            
-            schedule.forEach((period, index) => {
-                const startTime = parseTime(period.start);
-                const endTime = parseTime(period.end);
-                
-                if (currentTime >= startTime && currentTime <= endTime) {
-                    currentPeriod = `Зараз: ${period.name}`;
-                    const remaining = endTime - currentTime;
-                    currentPeriod += ` (залишилось ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')})`;
-                } else if (currentTime < startTime) {
-                    if (!nextPeriod) {
-                        const timeToStart = startTime - currentTime;
-                        nextPeriod = `Наступна: ${period.name} через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
-                    }
-                }
-            });
 
-            if (!currentPeriod && !nextPeriod) {
-                if (currentTime < parseTime('09:00')) {
-                    currentPeriod = 'Заняття ще не почались';
-                    const timeToStart = parseTime('09:00') - currentTime;
-                    nextPeriod = `1 пара почнеться через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
-                } else {
-                    currentPeriod = 'Заняття на сьогодні завершені';
+            // Проверка на выходные
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+                currentPeriod = 'Вихідний день';
+                nextPeriod = '';
+            } else {
+                schedule.forEach((period, index) => {
+                    const startTime = parseTime(period.start);
+                    const endTime = parseTime(period.end);
+
+                    if (currentTime >= startTime && currentTime <= endTime) {
+                        currentPeriod = `Зараз: ${period.name}`;
+                        const remaining = endTime - currentTime;
+                        currentPeriod += ` (залишилось ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')})`;
+                    } else if (currentTime < startTime) {
+                        if (!nextPeriod) {
+                            const timeToStart = startTime - currentTime;
+                            nextPeriod = `Наступна: ${period.name} через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
+                        }
+                    }
+                });
+
+                if (!currentPeriod && !nextPeriod) {
+                    if (currentTime < parseTime('09:00')) {
+                        currentPeriod = 'Заняття ще не почались';
+                        const timeToStart = parseTime('09:00') - currentTime;
+                        nextPeriod = `1 пара почнеться через ${Math.floor(timeToStart / 60)}:${String(timeToStart % 60).padStart(2, '0')}`;
+                    } else {
+                        currentPeriod = 'Заняття на сьогодні завершені';
+                    }
                 }
             }
 
