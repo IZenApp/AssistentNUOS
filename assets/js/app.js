@@ -153,12 +153,14 @@ async function registerServiceWorker() {
                 scope: './'
             });
             console.log('✅ Service Worker зареєстровано:', registration.scope);
-            
+
             // Перевіряємо оновлення
             registration.addEventListener('updatefound', () => {
                 const newWorker = registration.installing;
                 newWorker.addEventListener('statechange', () => {
                     if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // Отправляем сообщение для skipWaiting
+                        newWorker.postMessage({ type: 'SKIP_WAITING' });
                         showUpdateNotification();
                     }
                 });
@@ -247,13 +249,10 @@ function hideInstallPrompt() {
 }
 
 function handlePWAUpdates() {
-    let newWorkerAvailable = false;
-    
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.addEventListener('controllerchange', () => {
-            if (newWorkerAvailable) {
-                window.location.reload();
-            }
+            // При смене контроллера сразу перезагружаем страницу
+            window.location.reload();
         });
     }
 }
