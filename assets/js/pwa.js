@@ -16,9 +16,14 @@ if ('serviceWorker' in navigator) {
 async function registerServiceWorker() {
     try {
         const registration = await navigator.serviceWorker.register('./service-worker.js', {
-            scope: './'
+            scope: './',
+            // Принудительно проверяем обновления каждый раз
+            updateViaCache: 'none'
         });
         console.log('✅ Service Worker зареєстровано:', registration.scope);
+        
+        // Принудительно проверяем обновления при каждой загрузке
+        registration.update();
         
         // Обробка оновлень
         registration.addEventListener('updatefound', () => {
@@ -32,10 +37,18 @@ async function registerServiceWorker() {
             });
         });
         
+        // Проверяем версию кеша и принудительно обновляем если нужно
+        checkCacheVersion(registration);
+        
         // Перевіряємо чи є активний SW
         if (registration.active) {
             console.log('✅ Service Worker активний та готовий до роботи');
         }
+        
+        // Устанавливаем периодическую проверку обновлений
+        setInterval(() => {
+            registration.update();
+        }, 60000); // Проверяем каждую минуту
         
         return registration;
     } catch (error) {
@@ -47,7 +60,7 @@ async function registerServiceWorker() {
 
 function showUpdateNotification() {
     const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Оновити додаток';
+    updateBtn.textContent = 'Оновити зараз';
     updateBtn.style.cssText = `
         background: white;
         color: #667eea;
@@ -71,6 +84,41 @@ function showUpdateNotification() {
     });
     
     showNotification('🔄 Доступне оновлення додатка!', 'info', updateBtn);
+}
+
+// Функция проверки версии кеша
+async function checkCacheVersion(registration) {
+    try {
+        if (!registration.active) return;
+        
+        // Получаем текущую версию из localStorage
+        const savedVersion = localStorage.getItem('pwa-cache-version');
+        const currentVersion = 'v9.7'; // Обновите эту версию вместе с service-worker.js
+        
+        console.log(`Сохраненная версия: ${savedVersion}, текущая: ${currentVersion}`);
+        
+        if (savedVersion && savedVersion !== currentVersion) {
+            console.log('🔄 Обнаружена новая версия кеша, принудительно обновляем...');
+            
+            // Отправляем команду на принудительное обновление
+            registration.active.postMessage({ type: 'FORCE_UPDATE' });
+            
+            // Показываем уведомление
+            showNotification('Обновление кеша приложения...', 'info');
+            
+            // Ждем немного и перезагружаем
+            setTimeout(() => {
+                localStorage.setItem('pwa-cache-version', currentVersion);
+                window.location.reload();
+            }, 2000);
+        } else {
+            // Сохраняем текущую версию
+            localStorage.setItem('pwa-cache-version', currentVersion);
+        }
+        
+    } catch (error) {
+        console.error('❌ Ошибка проверки версии кеша:', error);
+    }
 }
 
 // ===== INSTALL PROMPT =====
@@ -435,6 +483,14 @@ if ('serviceWorker' in navigator) {
             window.location.reload();
         }, 1000);
     });
+    
+    // Слушаем сообщения от Service Worker
+    navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'CACHE_UPDATED') {
+            console.log('📦 Кеш обновлен до версии:', event.data.version);
+            showNotification(`Кеш обновлен до версии ${event.data.version}`, 'success');
+        }
+    });
 }
 
 // ===== ІНШІ PWA ФУНКЦІЇ =====
@@ -444,7 +500,8 @@ window.addEventListener('beforeunload', (e) => {
     // Перевіряємо чи додаток запущено в standalone режимі
     if (window.matchMedia('(display-mode: standalone)').matches) {
         e.preventDefault();
-        e.returnValue = '';
+        // Современный способ показать диалог подтверждения
+        return 'Ви дійсно хочете закрити додаток?';
     }
 });
 

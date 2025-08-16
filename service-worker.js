@@ -1,9 +1,12 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v9.5';
+const CACHE_VERSION = 'v9.7';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
+
+// Додаємо timestamp для запобігання кешування SW
+const SW_TIMESTAMP = Date.now();
 
 // Ресурси для кешування
 const STATIC_CACHE_URLS = [
@@ -141,9 +144,30 @@ self.addEventListener('fetch', event => {
 
 // Обробка повідомлень
 self.addEventListener('message', event => {
+    // Перевіряємо походження повідомлення для безпеки
+    if (event.origin !== self.location.origin) {
+        console.warn('⚠️ Отримано повідомлення з недовіреного джерела:', event.origin);
+        return;
+    }
+    
     if (event.data && event.data.type === 'SKIP_WAITING') {
         console.log('⏩ Примусова активація Service Worker');
         self.skipWaiting();
+    }
+    
+    // Додаємо підтримку запиту версії кешу
+    if (event.data && event.data.type === 'GET_VERSION') {
+        event.ports[0].postMessage({
+            type: 'VERSION_RESPONSE',
+            version: CACHE_VERSION,
+            timestamp: SW_TIMESTAMP
+        });
+    }
+    
+    // Додаємо підтримку примусового оновлення
+    if (event.data && event.data.type === 'FORCE_UPDATE') {
+        console.log('🔄 Примусове оновлення кешу');
+        event.waitUntil(forceUpdateCache());
     }
 });
 
@@ -343,4 +367,47 @@ async function findFallbackResource(request) {
     return null;
 }
 
-console.log('🎯 Service Worker завантажено для Асистента НУОС');
+// Функція для примусового оновлення кешу
+async function forceUpdateCache() {
+    try {
+        console.log('🔄 Початок примусового оновлення кешу...');
+        
+        // Видаляємо всі старі кеші
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(name => caches.delete(name)));
+        
+        // Створюємо новий кеш з актуальними ресурсами
+        const cache = await caches.open(CACHE_NAME);
+        
+        // Кешуємо ресурси з примусовим перезавантаженням
+        const cachePromises = STATIC_CACHE_URLS.map(async url => {
+            try {
+                const request = new Request(url, { cache: 'no-cache' });
+                const response = await fetch(request);
+                if (response.ok) {
+                    await cache.put(url, response);
+                    console.log(`🔄 Оновлено в кеші: ${url}`);
+                }
+            } catch (error) {
+                console.warn(`⚠️ Не вдалося оновити ${url}:`, error.message);
+            }
+        });
+        
+        await Promise.allSettled(cachePromises);
+        console.log('✅ Примусове оновлення кешу завершено');
+        
+        // Повідомляємо всім клієнтам про оновлення
+        const clients = await self.clients.matchAll();
+        clients.forEach(client => {
+            client.postMessage({
+                type: 'CACHE_UPDATED',
+                version: CACHE_VERSION
+            });
+        });
+        
+    } catch (error) {
+        console.error('❌ Помилка примусового оновлення кешу:', error);
+    }
+}
+
+console.log(`🎯 Service Worker завантажено для Асистента НУОС (версія ${CACHE_VERSION}, timestamp: ${SW_TIMESTAMP})`);
