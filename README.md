@@ -6,12 +6,12 @@
 
 **🎓 Прогресивний веб-додаток для студентів НУК імені адмірала Макарова**
 
-[![🌐 Website](https://img.shields.io/badge/Website-Live-success?style=for-the-badge&logo=github-pages)](https://izenapp.github.io/AssistentNUOS/)
+[![🌐 Website](https://img.shields.io/badge/Website-Live-success?style=for-the-badge&logo=github-pages)](https://evgnbch.github.io/AssistentNUOS/)
 [![📱 PWA Ready](https://img.shields.io/badge/PWA-Ready-brightgreen?style=for-the-badge&logo=pwa)](https://developers.google.com/web/progressive-web-apps/)
 [![⚡ Performance](https://img.shields.io/badge/Performance-A+-orange?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/)
 [![🔒 MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=open-source-initiative)](LICENSE)
 
-### 🌟 [**Відкрити додаток →**](https://izenapp.github.io/AssistentNUOS/)
+### 🌟 [**Відкрити додаток →**](https://evgnbch.github.io/AssistentNUOS/)
 
 *Ваш надійний супутник у навчальному процесі*
 
@@ -130,13 +130,13 @@
 ## 🚀 Быстрый старт
 
 ### 🌐 Использование
-**[🔗 Открыть AssistentNUOS →](https://izenapp.github.io/AssistentNUOS/)**
+**[🔗 Открыть AssistentNUOS →](https://evgnbch.github.io/AssistentNUOS/)**
 
 ### 💻 Локальная разработка
 
 ```bash
 # 📥 Клонирование репозитория
-git clone https://github.com/IZenApp/AssistentNUOS.git
+git clone https://github.com/evgnbch/AssistentNUOS.git
 cd AssistentNUOS
 
 # 🚀 Запуск локального сервера
@@ -299,15 +299,15 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ### 📊 **Версия 9.3** | 🗓️ **2025** | 📄 **MIT License**
 
-[![⭐ Star on GitHub](https://img.shields.io/github/stars/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS)
-[![🍴 Fork](https://img.shields.io/github/forks/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS/fork)
-[![👀 Watch](https://img.shields.io/github/watchers/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS)
+[![⭐ Star on GitHub](https://img.shields.io/github/stars/evgnbch/AssistentNUOS?style=social)](https://github.com/evgnbch/AssistentNUOS)
+[![🍴 Fork](https://img.shields.io/github/forks/evgnbch/AssistentNUOS?style=social)](https://github.com/evgnbch/AssistentNUOS/fork)
+[![👀 Watch](https://img.shields.io/github/watchers/evgnbch/AssistentNUOS?style=social)](https://github.com/evgnbch/AssistentNUOS)
 
 **🌟 Поддержите проект - поставьте звезду на GitHub!**
 
 ---
 
-*💭 Есть идеи для улучшения? [Создайте Issue](https://github.com/IZenApp/AssistentNUOS/issues/new) или отправьте [Pull Request](https://github.com/IZenApp/AssistentNUOS/compare)*
+*💭 Есть идеи для улучшения? [Создайте Issue](https://github.com/evgnbch/AssistentNUOS/issues/new) или отправьте [Pull Request](https://github.com/evgnbch/AssistentNUOS/compare)*
 
 **🎓 Внесите свой вклад в развитие университетской жизни!**
 
