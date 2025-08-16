@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест обновления PWA</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .test-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.2s;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        .status.success { background: rgba(76, 175, 80, 0.3); }
+        .status.error { background: rgba(244, 67, 54, 0.3); }
+        .status.info { background: rgba(33, 150, 243, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Тест системы обновления PWA</h1>
+        <p>Этот инструмент поможет протестировать механизм обновления PWA AssistentNUOS</p>
+        
+        <div id="status" class="status info">
+            📊 Инициализация...
+        </div>
+        
+        <div>
+            <button class="test-button" onclick="checkServiceWorker()">Проверить SW</button>
+            <button class="test-button" onclick="checkCacheVersion()">Версия кеша</button>
+            <button class="test-button" onclick="forceUpdate()">Принудительное обновление</button>
+            <button class="test-button" onclick="testNotifications()">Тест уведомлений</button>
+            <button class="test-button" onclick="clearStorage()">Очистить storage</button>
+            <button class="test-button" onclick="clearLog()">Очистить лог</button>
+        </div>
+        
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        const log = document.getElementById('log');
+        const status = document.getElementById('status');
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span style="color: #888">[${timestamp}]</span> ${message}`;
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+            
+            console.log(message);
+        }
+        
+        function updateStatus(message, type = 'info') {
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        async function checkServiceWorker() {
+            try {
+                addLog('🔍 Проверка Service Worker...');
+                
+                if (!('serviceWorker' in navigator)) {
+                    addLog('❌ Service Worker не поддерживается');
+                    updateStatus('Service Worker не поддерживается', 'error');
+                    return;
+                }
+                
+                const registration = await navigator.serviceWorker.getRegistration();
+                if (!registration) {
+                    addLog('❌ Service Worker не зарегистрирован');
+                    updateStatus('Service Worker не зарегистрирован', 'error');
+                    return;
+                }
+                
+                addLog(`✅ Service Worker зарегистрирован: ${registration.scope}`);
+                addLog(`📊 Активный: ${registration.active ? 'Да' : 'Нет'}`);
+                addLog(`📊 Ожидающий: ${registration.waiting ? 'Да' : 'Нет'}`);
+                addLog(`📊 Устанавливающийся: ${registration.installing ? 'Да' : 'Нет'}`);
+                
+                updateStatus('Service Worker работает корректно', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Ошибка проверки SW: ${error.message}`);
+                updateStatus('Ошибка проверки Service Worker', 'error');
+            }
+        }
+        
+        async function checkCacheVersion() {
+            try {
+                addLog('📦 Проверка версии кеша...');
+                
+                const savedVersion = localStorage.getItem('pwa-cache-version');
+                addLog(`💾 Сохраненная версия: ${savedVersion || 'Не найдена'}`);
+                
+                const cacheNames = await caches.keys();
+                addLog(`📊 Найдено кешей: ${cacheNames.length}`);
+                
+                cacheNames.forEach(name => {
+                    addLog(`📦 Кеш: ${name}`);
+                });
+                
+                updateStatus(`Версия кеша: ${savedVersion || 'неизвестна'}`, 'info');
+                
+            } catch (error) {
+                addLog(`❌ Ошибка проверки кеша: ${error.message}`);
+                updateStatus('Ошибка проверки кеша', 'error');
+            }
+        }
+        
+        async function forceUpdate() {
+            try {
+                addLog('🔄 Запуск принудительного обновления...');
+                
+                const registration = await navigator.serviceWorker.getRegistration();
+                if (!registration) {
+                    addLog('❌ Service Worker не найден');
+                    return;
+                }
+                
+                // Отправляем команду на принудительное обновление
+                if (registration.active) {
+                    registration.active.postMessage({ type: 'FORCE_UPDATE' });
+                    addLog('📤 Команда FORCE_UPDATE отправлена');
+                }
+                
+                // Также запрашиваем обновление регистрации
+                await registration.update();
+                addLog('🔄 Запрошено обновление регистрации');
+                
+                updateStatus('Принудительное обновление запущено', 'info');
+                
+            } catch (error) {
+                addLog(`❌ Ошибка принудительного обновления: ${error.message}`);
+                updateStatus('Ошибка обновления', 'error');
+            }
+        }
+        
+        function testNotifications() {
+            addLog('🔔 Тест системы уведомлений...');
+            
+            // Имитируем уведомления разных типов
+            setTimeout(() => {
+                showTestNotification('Тестовое уведомление об обновлении', 'info');
+            }, 500);
+            
+            setTimeout(() => {
+                showTestNotification('Кеш обновлен успешно!', 'success');
+            }, 1500);
+            
+            updateStatus('Тест уведомлений запущен', 'info');
+        }
+        
+        function showTestNotification(message, type) {
+            // Создаем уведомление в стиле приложения
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            addLog(`🔔 Показано уведомление: ${message}`);
+        }
+        
+        function clearStorage() {
+            try {
+                localStorage.removeItem('pwa-cache-version');
+                addLog('🗑️ localStorage очищен');
+                updateStatus('Storage очищен', 'success');
+            } catch (error) {
+                addLog(`❌ Ошибка очистки storage: ${error.message}`);
+                updateStatus('Ошибка очистки storage', 'error');
+            }
+        }
+        
+        function clearLog() {
+            log.innerHTML = '';
+            addLog('📋 Лог очищен');
+        }
+        
+        // Слушаем сообщения от Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data) {
+                    addLog(`📨 Сообщение от SW: ${JSON.stringify(event.data)}`);
+                    
+                    if (event.data.type === 'CACHE_UPDATED') {
+                        updateStatus(`Кеш обновлен до версии ${event.data.version}`, 'success');
+                    }
+                }
+            });
+        }
+        
+        // Инициализация
+        window.addEventListener('load', async () => {
+            addLog('🚀 Тест PWA инициализирован');
+            updateStatus('Готов к тестированию', 'success');
+            
+            // Автоматически проверяем SW
+            await checkServiceWorker();
+            await checkCacheVersion();
+        });
+    </script>
+</body>
+</html>
