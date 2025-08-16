@@ -97,13 +97,13 @@
 ### 🚀 Быстрый старт
 
 #### 🌐 Для пользователей
-1. **Откройте** [AssistentNUOS](https://izenapp.github.io/AssistentNUOS/)
+1. **Откройте** [AssistentNUOS](https://evgnbch.github.io/AssistentNUOS/)
 2. **Установите** PWA через браузер
 3. **Пользуйтесь** всеми возможностями!
 
 #### 💻 Для разработчиков
 ```bash
-git clone https://github.com/IZenApp/AssistentNUOS.git
+git clone https://github.com/evgnbch/AssistentNUOS.git
 cd AssistentNUOS
 python3 -m http.server 8080
 open http://localhost:8080
@@ -150,8 +150,8 @@ open http://localhost:8080
 ### 📞 Поддержка
 
 Нужна помощь? Есть идеи?
-- 📝 [Создать Issue](https://github.com/IZenApp/AssistentNUOS/issues/new)
-- 💬 [Обсуждения](https://github.com/IZenApp/AssistentNUOS/discussions)
+- 📝 [Создать Issue](https://github.com/evgnbch/AssistentNUOS/issues/new)
+- 💬 [Обсуждения](https://github.com/evgnbch/AssistentNUOS/discussions)
 - 📧 Email: assistentnuos@gmail.com
 
 ---
@@ -162,8 +162,8 @@ open http://localhost:8080
 
 **⭐ Поставьте звезду на GitHub если проект понравился!**
 
-[![⭐ Star](https://img.shields.io/github/stars/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS)
-[![🍴 Fork](https://img.shields.io/github/forks/IZenApp/AssistentNUOS?style=social)](https://github.com/IZenApp/AssistentNUOS/fork)
+[![⭐ Star](https://img.shields.io/github/stars/evgnbch/AssistentNUOS?style=social)](https://github.com/evgnbch/AssistentNUOS)
+[![🍴 Fork](https://img.shields.io/github/forks/evgnbch/AssistentNUOS?style=social)](https://github.com/evgnbch/AssistentNUOS/fork)
 
 **🚢 Сделано с ❤️ для студентов НУК имени адмирала Макарова**
 
