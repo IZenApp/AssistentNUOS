@@ -4,7 +4,7 @@
 🎓 Прогресивний веб-додаток для студентів НУК імені адмірала Макарова - ваш надійний супутник у навчальному процесі
 
 ## Website
-https://izenapp.github.io/AssistentNUOS/
+https://evgnbch.github.io/AssistentNUOS/
 
 ## Topics (separate with spaces)
 pwa progressive-web-app student-portal university-app glassmorphism responsive-design service-worker offline-first javascript html5 css3 mobile-first web-app ukraine education nuos shipbuilding university student-helper schedule navigation modern-ui
