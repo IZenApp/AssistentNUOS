@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v10.2';
+const CACHE_VERSION = 'v10.4';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
@@ -248,8 +248,8 @@ async function handlePageRequest(request) {
             return cachedResponse;
         }
         
-        // Повертаємо офлайн сторінку як fallback
-        return await caches.match('./pages/offline.html') || await caches.match('./index.html');
+    // Повертаємо офлайн сторінку як fallback
+    return await caches.match('./pages/offline.html') || await caches.match('./index.html');
     }
 }
 
