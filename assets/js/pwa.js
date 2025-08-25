@@ -15,10 +15,8 @@ if ('serviceWorker' in navigator) {
 // ===== SERVICE WORKER РЕЄСТРАЦІЯ =====
 async function registerServiceWorker() {
     try {
-        const registration = await navigator.serviceWorker.register('./service-worker.js', {
-            scope: './',
-            // Принудительно проверяем обновления каждый раз
-            updateViaCache: 'none'
+        const registration = await navigator.serviceWorker.register('service-worker.js', {
+            scope: './'
         });
         console.log('✅ Service Worker зареєстровано:', registration.scope);
         
@@ -37,7 +35,7 @@ async function registerServiceWorker() {
             });
         });
         
-        // Проверяем версию кеша и принудительно обновляем если нужно
+        // Проверяем версию кеша і принудительно обновляем если нужно
         checkCacheVersion(registration);
         
         // Перевіряємо чи є активний SW
@@ -93,7 +91,7 @@ async function checkCacheVersion(registration) {
         
         // Получаем текущую версию из localStorage
         const savedVersion = localStorage.getItem('pwa-cache-version');
-        const currentVersion = 'v9.7'; // Обновите эту версию вместе с service-worker.js
+        const currentVersion = 'v10.5.4'; // Обновите эту версию вместе с service-worker.js
         
         console.log(`Сохраненная версия: ${savedVersion}, текущая: ${currentVersion}`);
         
@@ -458,7 +456,7 @@ window.addEventListener('online', () => {
     if (offlineIndicator) {
         offlineIndicator.style.transform = 'translateY(-100%)';
     }
-    // Уведомление показывается только в app.js
+    // Уведомлення показується тільки в app.js
 });
 
 window.addEventListener('offline', () => {
@@ -467,7 +465,7 @@ window.addEventListener('offline', () => {
         offlineIndicator = createOfflineIndicator();
     }
     offlineIndicator.style.transform = 'translateY(0)';
-    // Уведомление показывается только в app.js, избегаем дублирования
+    // Уведомлення показується тільки в app.js, уникнення дублікації
 });
 
 // ===== ОНОВЛЕННЯ PWA =====
