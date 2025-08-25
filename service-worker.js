@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER ДЛЯ АСИСТЕНТА НУОС =====
 
-const CACHE_VERSION = 'v10.5.1';
+const CACHE_VERSION = 'v10.5.2';
 const STATIC_CACHE = `assistentNUOS-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `assistentNUOS-dynamic-${CACHE_VERSION}`;
 const CACHE_NAME = STATIC_CACHE;
@@ -242,14 +242,30 @@ async function handlePageRequest(request) {
         }
         return networkResponse;
     } catch (error) {
-        console.log('📱 Сторінка недоступна, завантажуємо з кешу:', request.url);
+        console.warn('📱 Сторінка недоступна, пробуем загрузить из кеша:', request.url, error);
         const cachedResponse = await caches.match(request);
         if (cachedResponse) {
+            console.log('✅ Найдено в кеше:', request.url);
             return cachedResponse;
         }
-        
-    // Повертаємо офлайн сторінку як fallback
-    return await caches.match('./pages/offline.html') || await caches.match('./index.html');
+        // Проверяем offline.html
+        const offlinePage = await caches.match('./pages/offline.html');
+        if (offlinePage) {
+            console.log('🟠 Возвращаем offline.html');
+            return offlinePage;
+        }
+        const indexPage = await caches.match('./index.html');
+        if (indexPage) {
+            console.log('🟠 Возвращаем index.html как fallback');
+            return indexPage;
+        }
+        // Если ничего не найдено, возвращаем простую offline-страницу
+        console.error('❌ offline.html и index.html не найдены в кеше!');
+        return new Response('<h1>Офлайн</h1><p>Страница недоступна и нет offline.html в кеше.</p>', {
+            headers: { 'Content-Type': 'text/html' },
+            status: 503,
+            statusText: 'Service Unavailable'
+        });
     }
 }
 
