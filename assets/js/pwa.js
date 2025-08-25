@@ -91,7 +91,7 @@ async function checkCacheVersion(registration) {
         
         // Получаем текущую версию из localStorage
         const savedVersion = localStorage.getItem('pwa-cache-version');
-        const currentVersion = 'v10.5.4'; // Обновите эту версию вместе с service-worker.js
+        const currentVersion = 'v10.5.5'; // Обновите эту версию вместе с service-worker.js
         
         console.log(`Сохраненная версия: ${savedVersion}, текущая: ${currentVersion}`);
         
